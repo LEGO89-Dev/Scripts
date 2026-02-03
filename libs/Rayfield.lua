@@ -2027,7 +2027,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 		-- Button
 		function Tab:CreateButton(ButtonSettings)
 		    local ButtonValue = {}
-		    local connections = {} -- Store event connections so we can disconnect them later
+		    local connections = {}
 		
 		    local Button = Elements.Template.Button:Clone()
 		    Button.Name = ButtonSettings.Name
@@ -2216,7 +2216,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 		        end
 		    end))
 		
-		    -- Hover effects
 		    table.insert(connections, Button.MouseEnter:Connect(function()
 		        TweenService:Create(Button, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackgroundHover}):Play()
 		        TweenService:Create(ElementIndicator, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {TextTransparency = 0.7}):Play()
@@ -2227,7 +2226,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 		        TweenService:Create(ElementIndicator, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {TextTransparency = 0.9}):Play()
 		    end))
 		
-		    -- API for outside
 		    function ButtonValue:Destroy()
 		        for _, conn in ipairs(connections) do
 		            conn:Disconnect()
@@ -2293,7 +2291,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 		    TextBox.Text = TextEditorSettings.CurrentValue
 		    TextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
 		    TextBox.TextSize = 14
-		    TextBox.BackgroundColor3 = Color3.new(0.137, 0.137, 0.137)
+		    TextBox.BackgroundColor3 = SelectedTheme.ElementBackground
 		    TextBox.Font = Enum.Font.Code
 		    TextBox.ClearTextOnFocus = false
 			TextBox.MultiLine = true
@@ -4043,7 +4041,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 		InputBox.Position = UDim2.new(0.5, 0, 0.5, 0)
 		InputBox.Size = UDim2.new(1, -15, 0, 14)
 		InputBox.AnchorPoint = Vector2.new(0.5, 0.5)
-		InputBox.BackgroundColor3 = Color3.new(1, 1, 1)
+		InputBox.BackgroundColor3 = SelectedTheme.ElementBackground
 		InputBox.BackgroundTransparency = 1
 		InputBox.ZIndex = 7
 		InputBox.Text = [[]]
@@ -4072,7 +4070,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 		Interact.Position = UDim2.new(0.5, 0, 0.5, 0)
 		Interact.Size = UDim2.new(1, 0, 1, 0)
 		Interact.AnchorPoint = Vector2.new(0.5, 0.5)
-		Interact.BackgroundColor3 = Color3.new(1, 1, 1)
+		Interact.BackgroundColor3 = SelectedTheme.ElementBackground
 		Interact.BackgroundTransparency = 1
 		Interact.ZIndex = 9
 		Interact.Text = [[]]
@@ -4114,7 +4112,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 		TextButton.Position = UDim2.new(1, -10, 0, 0)
 		TextButton.Size = UDim2.new(0, 35, 0, 35)
 		TextButton.AnchorPoint = Vector2.new(1, 0)
-		TextButton.BackgroundColor3 = Color3.new(0.19607843458652496, 0.19607843458652496, 0.19607843458652496)
+		TextButton.BackgroundColor3 = SelectedTheme.ElementBackground
 		TextButton.BackgroundTransparency = 0.5
 		TextButton.Visible = true
 		TextButton.ZIndex = 1
@@ -4129,7 +4127,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 		ImageLabel1.Position = UDim2.new(0.5, 0, 0.5, 0)
 		ImageLabel1.Size = UDim2.new(1, -10, 1, -10)
 		ImageLabel1.AnchorPoint = Vector2.new(0.5, 0.5)
-		ImageLabel1.BackgroundColor3 = Color3.new(0.6392157077789307, 0.6352941393852234, 0.6470588445663452)
+		ImageLabel1.BackgroundColor3 = SelectedTheme.ElementBackground
 		ImageLabel1.BackgroundTransparency = 1
 		ImageLabel1.Visible = true
 		ImageLabel1.ZIndex = 1
@@ -4309,7 +4307,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 		        end
 		    end))
 		
-		    -- Hover Events
 		    table.insert(connections, Button.MouseEnter:Connect(function()
 		        TweenService:Create(Button, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackgroundHover}):Play()
 		        TweenService:Create(Button.ElementIndicator, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {TextTransparency = 0.7}):Play()
@@ -4320,7 +4317,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 		        TweenService:Create(Button.ElementIndicator, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {TextTransparency = 0.9}):Play()
 		    end))
 		
-		    -- Methods
 		    function ButtonValue:Destroy()
 		        for _, conn in ipairs(connections) do
 		            conn:Disconnect()
@@ -4352,7 +4348,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 		    Button.Name = ButtonSettings.Name
 		    Button.Parent = TabPage.ScrollingFrame
 		    Button.Size = UDim2.new(1, -10, 0, 55)
-		    Button.BackgroundColor3 = Color3.new(0.137, 0.137, 0.137)
+		    Button.BackgroundColor3 = SelectedTheme.ElementBackground
 		
 		    local UICorner = Instance.new("UICorner")
 		    UICorner.CornerRadius = UDim.new(0, 9)
