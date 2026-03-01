@@ -2117,7 +2117,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 		    Button.Name = ButtonSettings.Name
 		    Button.Parent = TabPage
 		    Button.Size = UDim2.new(1, -10, 0, 55)
-		    Button.BackgroundColor3 = Color3.new(0.137, 0.137, 0.137)
+		    Button.BackgroundColor3 = SelectedTheme.ElementBackground
 		
 		    local UICorner = Instance.new("UICorner")
 		    UICorner.CornerRadius = UDim.new(0, 9)
@@ -4229,6 +4229,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 		        TweenService:Create(Button, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = Color3.fromRGB(85, 0, 0)}):Play()
 		        TweenService:Create(Button.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
 		        task.wait(0.5)
+		        warn("Rayfield | " .. ButtonSettings.Name .. " Callback Error " .. tostring(Response))
 		        TweenService:Create(Button, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
 		        TweenService:Create(Button.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 0}):Play()
 		    else
