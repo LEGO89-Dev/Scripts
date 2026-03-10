@@ -5001,7 +5001,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 					ImageLabel.Name = "Image"
 					ImageLabel.Image = v.Image
 					ImageLabel.Parent = TextButton
-					ImageLabel.Size = UDim2.new(0.9,0,0.9,0)
+					ImageLabel.Size = UDim2.new(0.7,0,0.7,0)
 					ImageLabel.BackgroundTransparency = 1
 					
 					local UICorner = Instance.new("UICorner")
@@ -5010,7 +5010,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 					
 					TextButton.MouseButton1Click:Connect(function()
 						pcall(v.Callback)
-						TweenService:Create(TextButton, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0.5}):Play()
+						TweenService:Create(TextButton, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0}):Play()
 			            task.wait(0.5)
 			            TweenService:Create(TextButton, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {BackgroundTransparency = 1}):Play()
 					end)
@@ -5030,18 +5030,16 @@ function RayfieldLibrary:CreateWindow(Settings)
 			Paragraph.Content.Text = ParagraphSettings.Content
 			Paragraph.Visible = true
 			Paragraph.Parent = TabPage.ScrollingFrame
-			Paragraph.Transparency = 1
+			Paragraph.BackgroundTransparency = 1
 			Paragraph:WaitForChild("Content").LayoutOrder = Layout
 			Layout = Layout + 1
 
-			Paragraph.BackgroundTransparency = 1
 			Paragraph.UIStroke.Transparency = 1
 			Paragraph.Content.TextTransparency = 1
 
 			Paragraph.BackgroundColor3 = SelectedTheme.SecondaryElementBackground
 			Paragraph.UIStroke.Color = SelectedTheme.SecondaryElementStroke
 
-			TweenService:Create(Paragraph, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0}):Play()
 			TweenService:Create(Paragraph.UIStroke, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
 			TweenService:Create(Paragraph.Content, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play()	
 
@@ -5082,7 +5080,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 					ImageLabel.Name = "Image"
 					ImageLabel.Image = v.Image
 					ImageLabel.Parent = TextButton
-					ImageLabel.Size = UDim2.new(0.9,0,0.9,0)
+					ImageLabel.Size = UDim2.new(0.7,0,0.7,0)
 					ImageLabel.BackgroundTransparency = 1
 					
 					local UICorner = Instance.new("UICorner")
@@ -5091,7 +5089,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 					
 					TextButton.MouseButton1Click:Connect(function()
 						pcall(v.Callback)
-						TweenService:Create(TextButton, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0.5}):Play()
+						TweenService:Create(TextButton, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0}):Play()
 			            task.wait(0.5)
 			            TweenService:Create(TextButton, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {BackgroundTransparency = 1}):Play()
 					end)
