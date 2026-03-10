@@ -653,17 +653,7 @@ until buildAttempts >= 2
 
 Rayfield.Enabled = false
 
-if gethui then
-	Rayfield.Parent = gethui()
-elseif syn and syn.protect_gui then 
-	syn.protect_gui(Rayfield)
-	Rayfield.Parent = CoreGui
-elseif not useStudio and CoreGui:FindFirstChild("RobloxGui") then
-	Rayfield.Parent = CoreGui:FindFirstChild("RobloxGui")
-elseif not useStudio then
-	Rayfield.Parent = CoreGui
-end
-
+Rayfield.Parent = CoreGui
 
 local minSize = Vector2.new(1024, 768)
 local useMobileSizing
@@ -1724,30 +1714,12 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 			KeyUI.Enabled = true
 
-			if gethui then
-				KeyUI.Parent = gethui()
-			elseif syn and syn.protect_gui then 
-				syn.protect_gui(KeyUI)
-				KeyUI.Parent = CoreGui
-			elseif not useStudio and CoreGui:FindFirstChild("RobloxGui") then
-				KeyUI.Parent = CoreGui:FindFirstChild("RobloxGui")
-			elseif not useStudio then
-				KeyUI.Parent = CoreGui
-			end
+			KeyUI.Parent = CoreGui
 
-			if gethui then
-				for _, Interface in ipairs(gethui():GetChildren()) do
-					if Interface.Name == KeyUI.Name and Interface ~= KeyUI then
-						Interface.Enabled = false
-						Interface.Name = "KeyUI-Old"
-					end
-				end
-			elseif not useStudio then
-				for _, Interface in ipairs(CoreGui:GetChildren()) do
-					if Interface.Name == KeyUI.Name and Interface ~= KeyUI then
-						Interface.Enabled = false
-						Interface.Name = "KeyUI-Old"
-					end
+			for _, Interface in ipairs(CoreGui:GetChildren()) do
+				if Interface.Name == KeyUI.Name and Interface ~= KeyUI then
+					Interface.Enabled = false
+					Interface.Name = "KeyUI-Old"
 				end
 			end
 
