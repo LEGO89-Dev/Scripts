@@ -4031,7 +4031,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 		UIStroke.Color = Color3.new(0.19607843458652496, 0.19607843458652496, 0.19607843458652496)
 		local InputFrame = Instance.new("Frame", Input)
 		InputFrame.Name = "InputFrame"
-		InputFrame.Position = UDim2.new(1, -50, 0, 20)
+		InputFrame.Position = UDim2.new(1, -50, 1, -20)
 		InputFrame.Size = UDim2.new(1, -60, 0, 30)
 		InputFrame.AnchorPoint = Vector2.new(1, 0.5)
 		InputFrame.BackgroundColor3 = Color3.new(0.11764705926179886, 0.11764705926179886, 0.11764705926179886)
@@ -4057,7 +4057,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 		UICorner_2.CornerRadius = UDim.new(0, 10)
 		local Button = Instance.new("Frame", Input)
 		Button.Name = "Button"
-		Button.Position = UDim2.new(1, -25, 0.5, 0)
+		Button.Position = UDim2.new(1, -25, 1, -20)
 		Button.Size = UDim2.new(0.5, -195, 0, 30)
 		Button.AnchorPoint = Vector2.new(0.5, 0.5)
 		Button.BackgroundColor3 = Color3.new(0.11764705926179886, 0.11764705926179886, 0.11764705926179886)
@@ -4142,6 +4142,39 @@ function RayfieldLibrary:CreateWindow(Settings)
 		UICorner_2.Name = "UICorner"
 		UICorner_2.Parent = TextButton
 		UICorner_2.CornerRadius = UDim.new(0.5, 0)
+		
+		local EditShow = Instance.new("Frame")
+		EditShow.Name = "EditShow"
+		EditShow.Parent = Input
+		EditShow.Active = true
+		EditShow.BackgroundTransparency = 1
+		EditShow.Position = UDim2.new(0,10,0,10)
+		EditShow.Size = UDim2.new(0.27000001072883606,0,0,10)
+		EditShow.ZIndex = 5
+		EditShow.Visible = false
+		
+		local TextLabel = Instance.new("TextLabel")
+		TextLabel.Name = "TextLabel"
+		TextLabel.Parent = EditShow
+		TextLabel.Active = true
+		TextLabel.BackgroundTransparency = 1
+		TextLabel.Size = UDim2.new(0.5,0,1,0)
+		TextLabel.ZIndex = 10
+		TextLabel.Text = "Editing Message"
+		TextLabel.TextColor3 = Color3.new(1,1,1)
+		TextLabel.TextSize = 10
+		TextLabel.TextXAlignment = Enum.TextXAlignment.Left
+		
+		local ImageButton = Instance.new("ImageButton")
+		ImageButton.Name = "ImageButton"
+		ImageButton.Parent = EditShow
+		ImageButton.AnchorPoint = Vector2.new(1,0.5)
+		ImageButton.BackgroundTransparency = 1
+		ImageButton.Position = UDim2.new(1,0,0.5,0)
+		ImageButton.Size = UDim2.new(0,20,0,20)
+		ImageButton.ZIndex = 10
+		ImageButton.Image = "rbxassetid://4458805208"
+
 		
 		TabPage.Name = Name
 		TabPage.Visible = true
@@ -4246,7 +4279,23 @@ function RayfieldLibrary:CreateWindow(Settings)
 			pcall(ButtonSettings.Callback2)
 		end)
 		
+		ImageButton.MouseButton1Click:Connect(function()
+			EditShow.Visible = false
+			TweenService:Create(Input, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Size = UDim2.new(1, -10, 0, 40)}):Play()
+			pcall(ButtonSettings.Callback3)
+		end)
+		
 		local Tab = {}
+		
+		function Tab:Edit(Value)
+			if Value then
+				EditShow.Visible = true
+				TweenService:Create(Input, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Size = UDim2.new(1, -10, 0, 65)}):Play()
+			else
+				EditShow.Visible = false
+				TweenService:Create(Input, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Size = UDim2.new(1, -10, 0, 40)}):Play()
+			end
+		end
 		
 		function Tab:GetText()
 			return InputBox.Text
