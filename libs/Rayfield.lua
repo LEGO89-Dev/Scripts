@@ -5000,7 +5000,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 					local ImageLabel = Instance.new("ImageLabel")
 					ImageLabel.Name = "Image"
 					ImageLabel.Image = v.Image
-					ImageLabel.Parent = ImageLabel
+					ImageLabel.Parent = TextButton
 					ImageLabel.Size = UDim2.new(0.9,0,0.9,0)
 					ImageLabel.BackgroundTransparency = 1
 					
@@ -5081,7 +5081,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 					local ImageLabel = Instance.new("ImageLabel")
 					ImageLabel.Name = "Image"
 					ImageLabel.Image = v.Image
-					ImageLabel.Parent = ImageLabel
+					ImageLabel.Parent = TextButton
 					ImageLabel.Size = UDim2.new(0.9,0,0.9,0)
 					ImageLabel.BackgroundTransparency = 1
 					
