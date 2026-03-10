@@ -5030,6 +5030,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 			Paragraph.Content.Text = ParagraphSettings.Content
 			Paragraph.Visible = true
 			Paragraph.Parent = TabPage.ScrollingFrame
+			Paragraph.Transparency = 1
 			Paragraph:WaitForChild("Content").LayoutOrder = Layout
 			Layout = Layout + 1
 
