@@ -4922,20 +4922,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 				Paragraph.UIStroke.Color = SelectedTheme.SecondaryElementStroke
 			end)
 			
-			Paragraph.InputBegan:Connect(function(input)
-				if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-					if debounce then
-						if ParagraphSettings.Callback then
-							pcall(ParagraphSettings.Callback)
-						end
-					else
-						debounce = true
-						task.wait(0.5)
-						debounce = false
-					end
-				end
-			end)
-			
 			function ParagraphValue:GetDestroy()
 				Paragraph:Destroy()
 			end
@@ -4994,7 +4980,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 				Frame.Active = true
 				Frame.AnchorPoint = Vector2.new(0.5,0.5)
 				Frame.BackgroundTransparency = 1
-				Frame.Size = UDim2.new(0,Paragraph.Content.Size.X,0,20)
+				Frame.Size = UDim2.new(0,Paragraph.Content.Size.X.Offset,0,20)
 				Frame.Transparency = 1
 				
 				local UIListLayout = Instance.new("UIListLayout")
@@ -5004,22 +4990,29 @@ function RayfieldLibrary:CreateWindow(Settings)
 				UIListLayout.Padding = UDim.new(0,4)
 				
 				for i, v in pairs(ParagraphSettings.ImgButton) do
-					local ImageButton = Instance.new("ImageButton")
-					ImageButton.Name = v.Name
-					ImageButton.Image = v.Image
-					ImageButton.Parent = Frame
-					ImageButton.Size = UDim2.new(0,20,0,20)
-					ImageButton.BackgroundTransparency = 1
+					local TextButton = Instance.new("TextButton")
+					TextButton.Name = v.Name
+					TextButton.Parent = Frame
+					TextButton.Size = UDim2.new(0,20,0,20)
+					TextButton.BackgroundColor3 = Color3.new(0,0,0)
+					TextButton.BackgroundTransparency = 1
+					
+					local ImageLabel = Instance.new("ImageLabel")
+					ImageLabel.Name = "Image"
+					ImageLabel.Image = v.Image
+					ImageLabel.Parent = ImageLabel
+					ImageLabel.Size = UDim2.new(0.9,0,0.9,0)
+					ImageLabel.BackgroundTransparency = 1
 					
 					local UICorner = Instance.new("UICorner")
 					UICorner.CornerRadius = UDim.new(0.5, 0)
-					UICorner.Parent = ImageButton
+					UICorner.Parent = TextButton
 					
-					ImageButton.MouseButton1Click:Connect(function()
+					TextButton.MouseButton1Click:Connect(function()
 						pcall(v.Callback)
-						TweenService:Create(ImageButton, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0.5}):Play()
+						TweenService:Create(TextButton, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0.5}):Play()
 			            task.wait(0.5)
-			            TweenService:Create(ImageButton, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {BackgroundTransparency = 1}):Play()
+			            TweenService:Create(TextButton, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {BackgroundTransparency = 1}):Play()
 					end)
 				end
 			end
@@ -5067,7 +5060,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 				Frame.Active = true
 				Frame.AnchorPoint = Vector2.new(0.5,0.5)
 				Frame.BackgroundTransparency = 1
-				Frame.Size = UDim2.new(0,Paragraph.Content.Size.X,0,20)
+				Frame.Size = UDim2.new(0,Paragraph.Content.Size.X.Offset,0,20)
 				Frame.Transparency = 1
 				
 				local UIListLayout = Instance.new("UIListLayout")
@@ -5077,21 +5070,29 @@ function RayfieldLibrary:CreateWindow(Settings)
 				UIListLayout.Padding = UDim.new(0,4)
 				
 				for i, v in pairs(ParagraphSettings.ImgButton) do
-					local ImageButton = Instance.new("ImageButton")
-					ImageButton.Name = v.Name
-					ImageButton.Image = v.Image
-					ImageButton.Parent = Frame
-					ImageButton.Size = UDim2.new(0,20,0,20)
-					ImageButton.BackgroundTransparency = 1
+					local TextButton = Instance.new("TextButton")
+					TextButton.Name = v.Name
+					TextButton.Parent = Frame
+					TextButton.Size = UDim2.new(0,20,0,20)
+					TextButton.BackgroundColor3 = Color3.new(0,0,0)
+					TextButton.BackgroundTransparency = 1
+					
+					local ImageLabel = Instance.new("ImageLabel")
+					ImageLabel.Name = "Image"
+					ImageLabel.Image = v.Image
+					ImageLabel.Parent = ImageLabel
+					ImageLabel.Size = UDim2.new(0.9,0,0.9,0)
+					ImageLabel.BackgroundTransparency = 1
 					
 					local UICorner = Instance.new("UICorner")
 					UICorner.CornerRadius = UDim.new(0.5, 0)
-					UICorner.Parent = ImageButton
+					UICorner.Parent = TextButton
 					
-					ImageButton.MouseButton1Click:Connect(function()
-						TweenService:Create(ImageButton, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0.5}):Play()
+					TextButton.MouseButton1Click:Connect(function()
+						pcall(v.Callback)
+						TweenService:Create(TextButton, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0.5}):Play()
 			            task.wait(0.5)
-			            TweenService:Create(ImageButton, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {BackgroundTransparency = 1}):Play()
+			            TweenService:Create(TextButton, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {BackgroundTransparency = 1}):Play()
 					end)
 				end
 			end
