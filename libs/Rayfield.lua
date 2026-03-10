@@ -653,7 +653,17 @@ until buildAttempts >= 2
 
 Rayfield.Enabled = false
 
-Rayfield.Parent = CoreGui
+if gethui then
+	Rayfield.Parent = gethui()
+elseif syn and syn.protect_gui then 
+	syn.protect_gui(Rayfield)
+	Rayfield.Parent = CoreGui
+elseif not useStudio and CoreGui:FindFirstChild("RobloxGui") then
+	Rayfield.Parent = CoreGui:FindFirstChild("RobloxGui")
+elseif not useStudio then
+	Rayfield.Parent = CoreGui
+end
+
 
 local minSize = Vector2.new(1024, 768)
 local useMobileSizing
@@ -1714,12 +1724,30 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 			KeyUI.Enabled = true
 
-			KeyUI.Parent = CoreGui
+			if gethui then
+				KeyUI.Parent = gethui()
+			elseif syn and syn.protect_gui then 
+				syn.protect_gui(KeyUI)
+				KeyUI.Parent = CoreGui
+			elseif not useStudio and CoreGui:FindFirstChild("RobloxGui") then
+				KeyUI.Parent = CoreGui:FindFirstChild("RobloxGui")
+			elseif not useStudio then
+				KeyUI.Parent = CoreGui
+			end
 
-			for _, Interface in ipairs(CoreGui:GetChildren()) do
-				if Interface.Name == KeyUI.Name and Interface ~= KeyUI then
-					Interface.Enabled = false
-					Interface.Name = "KeyUI-Old"
+			if gethui then
+				for _, Interface in ipairs(gethui():GetChildren()) do
+					if Interface.Name == KeyUI.Name and Interface ~= KeyUI then
+						Interface.Enabled = false
+						Interface.Name = "KeyUI-Old"
+					end
+				end
+			elseif not useStudio then
+				for _, Interface in ipairs(CoreGui:GetChildren()) do
+					if Interface.Name == KeyUI.Name and Interface ~= KeyUI then
+						Interface.Enabled = false
+						Interface.Name = "KeyUI-Old"
+					end
 				end
 			end
 
@@ -4955,22 +4983,44 @@ function RayfieldLibrary:CreateWindow(Settings)
 				Paragraph2.UIStroke.Color = SelectedTheme.SecondaryElementStroke
 			end)
 			
-			Paragraph2.InputBegan:Connect(function(input)
-				if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-					if debounce then
-						if ParagraphSettings.Callback then
-							pcall(ParagraphSettings.Callback)
-						end
-					else
-						debounce = true
-						task.wait(0.5)
-						debounce = false
-					end
-				end
-			end)
-			
 			function ParagraphValue:GetDestroy()
 				Paragraph1:Destroy()
+			end
+			
+			if ParagraphSettings.ImgButton then
+				local Frame = Instance.new("Frame")
+				Frame.Name = "BottomFrame"
+				Frame.Parent = Paragraph
+				Frame.Active = true
+				Frame.AnchorPoint = Vector2.new(0.5,0.5)
+				Frame.BackgroundTransparency = 1
+				Frame.Size = UDim2.new(0,Paragraph.Content.Size.X,0,20)
+				Frame.Transparency = 1
+				
+				local UIListLayout = Instance.new("UIListLayout")
+				UIListLayout.Name = "UIListLayout"
+				UIListLayout.Parent = Frame
+				UIListLayout.FillDirection = Enum.FillDirection.Horizontal
+				UIListLayout.Padding = UDim.new(0,4)
+				
+				for i, v in pairs(ParagraphSettings.ImgButton) do
+					local ImageButton = Instance.new("ImageButton")
+					ImageButton.Name = v.Name
+					ImageButton.Image = v.Image
+					ImageButton.Parent = Frame
+					ImageButton.Size = UDim2.new(0,20,0,20)
+					ImageButton.BackgroundTransparency = 1
+					
+					local UICorner = Instance.new("UICorner")
+					UICorner.CornerRadius = UDim.new(0.5, 0)
+					UICorner.Parent = ImageButton
+					
+					ImageButton.MouseButton1Click:Connect(function()
+						TweenService:Create(ImageButton, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0.5}):Play()
+			            task.wait(0.5)
+			            TweenService:Create(ImageButton, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {BackgroundTransparency = 1}):Play()
+					end)
+				end
 			end
 
 			return ParagraphValue
@@ -5009,19 +5059,41 @@ function RayfieldLibrary:CreateWindow(Settings)
 				Paragraph.UIStroke.Color = SelectedTheme.SecondaryElementStroke
 			end)
 			
-			Paragraph.InputBegan:Connect(function(input)
-				if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-					if debounce then
-						if ParagraphSettings.Callback then
-							pcall(ParagraphSettings.Callback)
-						end
-					else
-						debounce = true
-						task.wait(0.5)
-						debounce = false
-					end
+			if ParagraphSettings.ImgButton then
+				local Frame = Instance.new("Frame")
+				Frame.Name = "BottomFrame"
+				Frame.Parent = Paragraph
+				Frame.Active = true
+				Frame.AnchorPoint = Vector2.new(0.5,0.5)
+				Frame.BackgroundTransparency = 1
+				Frame.Size = UDim2.new(0,Paragraph.Content.Size.X,0,20)
+				Frame.Transparency = 1
+				
+				local UIListLayout = Instance.new("UIListLayout")
+				UIListLayout.Name = "UIListLayout"
+				UIListLayout.Parent = Frame
+				UIListLayout.FillDirection = Enum.FillDirection.Horizontal
+				UIListLayout.Padding = UDim.new(0,4)
+				
+				for i, v in pairs(ParagraphSettings.ImgButton) do
+					local ImageButton = Instance.new("ImageButton")
+					ImageButton.Name = v.Name
+					ImageButton.Image = v.Image
+					ImageButton.Parent = Frame
+					ImageButton.Size = UDim2.new(0,20,0,20)
+					ImageButton.BackgroundTransparency = 1
+					
+					local UICorner = Instance.new("UICorner")
+					UICorner.CornerRadius = UDim.new(0.5, 0)
+					UICorner.Parent = ImageButton
+					
+					ImageButton.MouseButton1Click:Connect(function()
+						TweenService:Create(ImageButton, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0.5}):Play()
+			            task.wait(0.5)
+			            TweenService:Create(ImageButton, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {BackgroundTransparency = 1}):Play()
+					end)
 				end
-			end)
+			end
 			
 			function ParagraphValue:GetDestroy()
 				Paragraph:Destroy()
