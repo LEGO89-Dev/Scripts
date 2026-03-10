@@ -4984,7 +4984,8 @@ function RayfieldLibrary:CreateWindow(Settings)
 				Frame.Active = true
 				Frame.AnchorPoint = Vector2.new(0.5,0.5)
 				Frame.BackgroundTransparency = 1
-				Frame.Size = UDim2.new(0,Paragraph2.Content.Size.X.Offset,0,20)
+				Frame.LayoutOrder = 100
+				Frame.Size = UDim2.new(1,0,0,0)
 				Frame.Transparency = 1
 				
 				local UIListLayout = Instance.new("UIListLayout")
