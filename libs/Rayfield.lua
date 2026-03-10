@@ -5016,6 +5016,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 					UICorner.Parent = ImageButton
 					
 					ImageButton.MouseButton1Click:Connect(function()
+						pcall(v.Callback)
 						TweenService:Create(ImageButton, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0.5}):Play()
 			            task.wait(0.5)
 			            TweenService:Create(ImageButton, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {BackgroundTransparency = 1}):Play()
