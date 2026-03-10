@@ -5072,6 +5072,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 					local TextButton = Instance.new("TextButton")
 					TextButton.Name = v.Name
 					TextButton.Parent = Frame
+					TextButton.Text = ""
 					TextButton.Size = UDim2.new(0,20,0,20)
 					TextButton.BackgroundColor3 = Color3.new(0,0,0)
 					TextButton.BackgroundTransparency = 1
@@ -5080,6 +5081,8 @@ function RayfieldLibrary:CreateWindow(Settings)
 					ImageLabel.Name = "Image"
 					ImageLabel.Image = v.Image
 					ImageLabel.Parent = TextButton
+					ImageLabel.AnchorPoint = Vector2.new(0.5,0.5)
+					ImageLabel.Position = UDim2.new(0.5,0,0.5,0)
 					ImageLabel.Size = UDim2.new(0.7,0,0.7,0)
 					ImageLabel.BackgroundTransparency = 1
 					
