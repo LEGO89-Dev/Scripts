@@ -4973,14 +4973,18 @@ function RayfieldLibrary:CreateWindow(Settings)
 				Paragraph1:Destroy()
 			end
 			
+			function ParagraphValue:GetObj()
+				return Paragraph2
+			end
+			
 			if ParagraphSettings.ImgButton then
 				local Frame = Instance.new("Frame")
 				Frame.Name = "BottomFrame"
-				Frame.Parent = Paragraph
+				Frame.Parent = Paragraph2
 				Frame.Active = true
 				Frame.AnchorPoint = Vector2.new(0.5,0.5)
 				Frame.BackgroundTransparency = 1
-				Frame.Size = UDim2.new(0,Paragraph.Content.Size.X.Offset,0,20)
+				Frame.Size = UDim2.new(0,Paragraph2.Content.Size.X.Offset,0,20)
 				Frame.Transparency = 1
 				
 				local UIListLayout = Instance.new("UIListLayout")
@@ -4993,6 +4997,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 					local TextButton = Instance.new("TextButton")
 					TextButton.Name = v.Name
 					TextButton.Parent = Frame
+					TextButton.Text = ""
 					TextButton.Size = UDim2.new(0,20,0,20)
 					TextButton.BackgroundColor3 = Color3.new(0,0,0)
 					TextButton.BackgroundTransparency = 1
@@ -5001,6 +5006,8 @@ function RayfieldLibrary:CreateWindow(Settings)
 					ImageLabel.Name = "Image"
 					ImageLabel.Image = v.Image
 					ImageLabel.Parent = TextButton
+					ImageLabel.AnchorPoint = Vector2.new(0.5,0.5)
+					ImageLabel.Position = UDim2.new(0.5,0,0.5,0)
 					ImageLabel.Size = UDim2.new(0.7,0,0.7,0)
 					ImageLabel.BackgroundTransparency = 1
 					
@@ -5101,6 +5108,10 @@ function RayfieldLibrary:CreateWindow(Settings)
 			
 			function ParagraphValue:GetDestroy()
 				Paragraph:Destroy()
+			end
+			
+			function ParagraphValue:GetObj()
+				return Paragraph
 			end
 			
 			function ParagraphValue:CreateContent(ContentValue)
