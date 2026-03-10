@@ -4019,8 +4019,9 @@ function RayfieldLibrary:CreateWindow(Settings)
 		TabPage.BackgroundTransparency = 1
 		local Input = Instance.new("Frame", TabPage)
 		Input.Name = "Input"
-		Input.Position = UDim2.new(0.010526316240429878, 0, 0.752112090587616, 0)
+		Input.Position = UDim2.new(0.5, 0, 1, 0)
 		Input.Size = UDim2.new(1, -10, 0, 40)
+		Input.AnchorPoint = Vector2.new(0.5, 1)
 		Input.BackgroundColor3 = Color3.new(0.13725490868091583, 0.13725490868091583, 0.13725490868091583)
 		Input.BackgroundTransparency = 0
 		Input.ZIndex = 5
