@@ -5034,7 +5034,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 				Frame.Active = true
 				Frame.AnchorPoint = Vector2.new(0.5,0.5)
 				Frame.BackgroundTransparency = 1
-				Frame.LayoutOrder = 100
+				Frame.LayoutOrder = 10000
 				Frame.Size = UDim2.new(1,0,0,0)
 				Frame.Transparency = 1
 				
@@ -5115,6 +5115,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 				Frame.Name = "BottomFrame"
 				Frame.Parent = Paragraph
 				Frame.Active = true
+				Frame.LayoutOrder = 10000
 				Frame.AnchorPoint = Vector2.new(0.5,0.5)
 				Frame.BackgroundTransparency = 1
 				Frame.Size = UDim2.new(0,Paragraph.Content.Size.X.Offset,0,20)
