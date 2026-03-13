@@ -4071,7 +4071,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 		Button.Position = UDim2.new(1, -25, 1, -20)
 		Button.Size = UDim2.new(0.5, -195, 0, 30)
 		Button.AnchorPoint = Vector2.new(0.5, 0.5)
-		Button.BackgroundColor3 = Color3.new(0.11764705926179886, 0.11764705926179886, 0.11764705926179886)
+		Button.BackgroundColor3 = SelectedTheme.ElementBackground
 		Button.ZIndex = 6
 		local UICorner_3 = Instance.new("UICorner", Button)
 		UICorner_3.CornerRadius = UDim.new(0, 9)
