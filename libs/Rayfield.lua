@@ -2279,6 +2279,19 @@ function RayfieldLibrary:CreateWindow(Settings)
 			ScrollingFrame.HorizontalScrollBarInset = Enum.ScrollBarInset.Always
 			ScrollingFrame.VerticalScrollBarInset = Enum.ScrollBarInset.Always
 			
+			local TextButton = Instance.new("TextButton")
+		    TextButton.Name = "TextButton"
+		    TextButton.Size = UDim2.new(1, 0, 1, 0)
+		    TextButton.BackgroundTransparency = 1
+		    TextButton.Text = TextEditorSettings.CurrentValue
+		    TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+		    TextButton.TextSize = 14
+		    TextButton.Parent = ScrollingFrame
+		    TextButton.Font = Enum.Font.Code
+		    TextButton.TextYAlignment = Enum.TextYAlignment.Top
+		    TextButton.TextXAlignment = Enum.TextXAlignment.Left
+		    TextButton.AutomaticSize = Enum.AutomaticSize.XY
+		    TextButton.TextWrapped = false
 		
 		    local TextBox = Instance.new("TextBox")
 		    TextBox.Name = "TextBox"
@@ -2297,6 +2310,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 			TextBox.MultiLine = true
 			TextBox.TextWrapped = false
 			TextBox.TextYAlignment = Enum.TextYAlignment.Top
+			TextBox.Visible = false
 			
 			local UICorner = Instance.new("UICorner")
 		    UICorner.CornerRadius = UDim.new(0, 9)
@@ -2304,8 +2318,15 @@ function RayfieldLibrary:CreateWindow(Settings)
 		
 		    TweenService:Create(TextEditor, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0}):Play()
 		    TweenService:Create(UIStroke, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {Transparency = 0}):Play()
+		    
+		    TextButton.MouseButton1Click:Connect(function()
+		    	TextBox:CaptureFocus()
+		    	TextButton.Visible = false
+		    end)
 		
 		    TextBox.FocusLost:Connect(function()
+		    	TextButton.Visible = true
+		    	TextButton.Text = TextBox.Text
 				local Success, Response = pcall(function()
 					TextEditorSettings.Callback(TextBox.Text)
 					TextEditorSettings.CurrentValue = TextBox.Text
@@ -2324,7 +2345,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 				if TextEditorSettings.RemoveTextAfterFocusLost then
 					TextBox.Text = ""
 				end
-
 			end)
 
 			TextEditor.MouseEnter:Connect(function()
@@ -3015,7 +3035,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 					DropdownOption.BackgroundTransparency = 1
 					DropdownOption.UIStroke.Transparency = 1
 					DropdownOption.Title.TextTransparency = 1
-					DropdownOption.BackgroundColor3 = SelectedTheme.DropdownSelected
+					DropdownOption.BackgroundColor3 = SelectedTheme.DropdownUnselected
 
 					DropdownOption.Interact.ZIndex = 50
 					DropdownOption.Interact.MouseButton1Click:Connect(function()
@@ -4023,7 +4043,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 		InputFrame.Position = UDim2.new(1, -50, 1, -20)
 		InputFrame.Size = UDim2.new(1, -60, 0, 30)
 		InputFrame.AnchorPoint = Vector2.new(1, 0.5)
-		InputFrame.BackgroundColor3 = Color3.new(0.11764705926179886, 0.11764705926179886, 0.11764705926179886)
+		InputFrame.BackgroundColor3 = SelectedTheme.ElementBackground
 		InputFrame.ZIndex = 6
 		local InputBox = Instance.new("TextBox", InputFrame)
 		InputBox.Name = "InputBox"
@@ -4184,8 +4204,8 @@ function RayfieldLibrary:CreateWindow(Settings)
 		end
 		
 		Rayfield.Main:GetPropertyChangedSignal('BackgroundColor3'):Connect(function()
-			TextButton.BackgroundColor3 = SelectedTheme.ElementBackground
-			InputBox.BackgroundColor3 = SelectedTheme.ElementBackground
+			Button.BackgroundColor3 = SelectedTheme.ElementBackground
+			InputFrame.BackgroundColor3 = SelectedTheme.ElementBackground
 		end)
 
 		TabButton.UIStroke.Color = SelectedTheme.TabStroke
