@@ -2278,6 +2278,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 			ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 			ScrollingFrame.HorizontalScrollBarInset = Enum.ScrollBarInset.Always
 			ScrollingFrame.VerticalScrollBarInset = Enum.ScrollBarInset.Always
+			ScrollingFrame.ElasticBehavior = Enum.ElasticBehavior.Never
 			
 			local TextButton = Instance.new("TextButton")
 		    TextButton.Name = "TextButton"
@@ -2358,6 +2359,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 			function TextEditorValue:Set(text)
 				TextBox.Text = text
 				TextEditorSettings.CurrentValue = text
+				TextButton.Text = TextBox.Text
 
 				local Success, Response = pcall(function()
 					TextEditorSettings.Callback(text)
