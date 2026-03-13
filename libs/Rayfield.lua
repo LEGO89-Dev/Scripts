@@ -3015,18 +3015,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 					DropdownOption.BackgroundTransparency = 1
 					DropdownOption.UIStroke.Transparency = 1
 					DropdownOption.Title.TextTransparency = 1
-
-					--local Dropdown = Tab:CreateDropdown({
-					--	Name = "Dropdown Example",
-					--	Options = {"Option 1","Option 2"},
-					--	CurrentOption = {"Option 1"},
-					--  MultipleOptions = true,
-					--	Flag = "Dropdown1",
-					--	Callback = function(TableOfOptions)
-
-					--	end,
-					--})
-
+					DropdownOption.ElementBackground = SelectedTheme.DropdownSelected
 
 					DropdownOption.Interact.ZIndex = 50
 					DropdownOption.Interact.MouseButton1Click:Connect(function()
@@ -4193,6 +4182,11 @@ function RayfieldLibrary:CreateWindow(Settings)
 			Elements.UIPageLayout:JumpTo(TabPage)
 			Elements.UIPageLayout.Animated = true
 		end
+		
+		Rayfield.Main:GetPropertyChangedSignal('BackgroundColor3'):Connect(function()
+			TextButton.BackgroundColor3 = SelectedTheme.ElementBackground
+			InputBox.BackgroundColor3 = SelectedTheme.ElementBackground
+		end)
 
 		TabButton.UIStroke.Color = SelectedTheme.TabStroke
 
