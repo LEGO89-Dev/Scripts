@@ -3015,7 +3015,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 					DropdownOption.BackgroundTransparency = 1
 					DropdownOption.UIStroke.Transparency = 1
 					DropdownOption.Title.TextTransparency = 1
-					DropdownOption.ElementBackground = SelectedTheme.DropdownSelected
+					DropdownOption.BackgroundColor3 = SelectedTheme.DropdownSelected
 
 					DropdownOption.Interact.ZIndex = 50
 					DropdownOption.Interact.MouseButton1Click:Connect(function()
