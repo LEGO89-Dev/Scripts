@@ -6477,6 +6477,9 @@ for _, TopbarButton in ipairs(Topbar:GetChildren()) do
 	end
 end
 
+function RayfieldLibrary:GetMain()
+	return Main
+end
 
 function RayfieldLibrary:LoadConfiguration()
 	local config
