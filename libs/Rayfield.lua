@@ -1962,7 +1962,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 		
 	local UICorner2 = Instance.new("UICorner")
 	UICorner2.CornerRadius = UDim.new(0, 9)
-	UICorner2.Parent = ImageLabel
+		    UICorner2.Parent = ImageLabel
 
 	Elements.UIPageLayout.FillDirection = Enum.FillDirection.Horizontal
 	TabList.Template.Visible = false
@@ -2194,7 +2194,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 		    TweenService:Create(Button.Title, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play()
 		
 		    -- Click callback
-		    table.insert(connections, Interact.MouseButton1Click:Connect(function()
+		    table.insert(connections, Button.Interact.MouseButton1Click:Connect(function()
 		        local Success, Response = pcall(ButtonSettings.Callback)
 		        if rayfieldDestroyed then return end
 		
