@@ -4206,8 +4206,8 @@ function RayfieldLibrary:CreateWindow(Settings)
 		end
 		
 		Rayfield.Main:GetPropertyChangedSignal('BackgroundColor3'):Connect(function()
-			Button.BackgroundColor3 = SelectedTheme.ElementBackground
-			InputFrame.BackgroundColor3 = SelectedTheme.ElementBackground
+			Button.BackgroundColor3 = SelectedTheme.InputBackground
+			InputFrame.BackgroundColor3 = SelectedTheme.InputBackground
 		end)
 
 		TabButton.UIStroke.Color = SelectedTheme.TabStroke
@@ -4217,7 +4217,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 			TabButton.Image.ImageColor3 = SelectedTheme.SelectedTabTextColor
 			TabButton.Title.TextColor3 = SelectedTheme.SelectedTabTextColor
 		else
-			TabButton.BackgroundColor3 = SelectedTheme.TabBackground
+			TabButton.BackgroundColor3 =I'll SelectedTheme.TabBackground
 			TabButton.Image.ImageColor3 = SelectedTheme.TabTextColor
 			TabButton.Title.TextColor3 = SelectedTheme.TabTextColor
 		end
