@@ -5029,8 +5029,9 @@ function RayfieldLibrary:CreateWindow(Settings)
 			end
 
 			Rayfield.Main:GetPropertyChangedSignal('BackgroundColor3'):Connect(function()
-				Paragraph2.BackgroundColor3 = SelectedTheme.SecondaryElementBackground
-				Paragraph2.UIStroke.Color = SelectedTheme.SecondaryElementStroke
+				if not Paragraph2 then return end
+				Paragraph2.BackgroundColor3 = SelectedTheme.ElementBackground
+				Paragraph2.UIStroke.Color = SelectedTheme.ElementStroke
 			end)
 			
 			function ParagraphValue:GetDestroy()
@@ -5120,8 +5121,9 @@ function RayfieldLibrary:CreateWindow(Settings)
 			end
 
 			Rayfield.Main:GetPropertyChangedSignal('BackgroundColor3'):Connect(function()
-				Paragraph.BackgroundColor3 = SelectedTheme.SecondaryElementBackground
-				Paragraph.UIStroke.Color = SelectedTheme.SecondaryElementStroke
+				if not Paragraph then return end
+				Paragraph2.BackgroundColor3 = SelectedTheme.ElementBackground
+				Paragraph2.UIStroke.Color = SelectedTheme.ElementStroke
 			end)
 			
 			if ParagraphSettings.ImgButton then
