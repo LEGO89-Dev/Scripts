@@ -1898,6 +1898,71 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 	Elements.Template.LayoutOrder = 100000
 	Elements.Template.Visible = false
+	
+	local Button = Instance.new("Frame")
+	Button.Name = "ImageButton"
+	Button.Parent = Elements.Template
+	Button.Size = UDim2.new(1, -10, 0, 55)
+	Button.BackgroundColor3 = SelectedTheme.ElementBackground
+		
+	local UICorner = Instance.new("UICorner")
+	UICorner.CornerRadius = UDim.new(0, 9)
+	UICorner.Parent = Button
+		
+	local UIStroke = Instance.new("UIStroke")
+	UIStroke.Color = Color3.new(0.196, 0.196, 0.196)
+	UIStroke.Thickness = 1
+	UIStroke.Parent = Button
+		
+	local Title = Instance.new("TextLabel")
+	Title.Name = "Title"
+	Title.Parent = Button
+	Title.Position = UDim2.new(0, 100, 0.5, 0)
+	Title.Size = UDim2.new(0, 300, 0, 14)
+	Title.AnchorPoint = Vector2.new(0, 0.5)
+	Title.BackgroundTransparency = 1
+	Title.TextXAlignment = Enum.TextXAlignment.Left
+	Title.Text = "Text"
+	Title.TextColor3 = Color3.fromRGB(240, 240, 240)
+	Title.TextSize = 14
+	Title.Font = Enum.Font.GothamMedium
+		
+	local ElementIndicator = Instance.new("TextLabel")
+	ElementIndicator.Name = "ElementIndicator"
+	ElementIndicator.Parent = Button
+	ElementIndicator.Position = UDim2.new(1, -10, 0.5, 0)
+	ElementIndicator.Size = UDim2.new(0, 108, 0, 13)
+	ElementIndicator.AnchorPoint = Vector2.new(1, 0.5)
+	ElementIndicator.BackgroundTransparency = 1
+	ElementIndicator.Text = "button"
+	ElementIndicator.TextColor3 = Color3.fromRGB(240, 240, 240)
+	ElementIndicator.TextSize = 14
+	ElementIndicator.Font = Enum.Font.GothamMedium
+	ElementIndicator.TextXAlignment = Enum.TextXAlignment.Right
+	ElementIndicator.TextTransparency = 0.9
+		
+	local Interact = Instance.new("TextButton")
+	Interact.Name = "Interact"
+	Interact.Parent = Button
+	Interact.TextTransparency = 1
+	Interact.Size = UDim2.new(1, 0, 1, 0)
+	Interact.BackgroundTransparency = 1
+	Interact.ZIndex = 5
+		
+	local ImageLabel = Instance.new("ImageLabel")
+	ImageLabel.Name = "ImageLabel"
+	ImageLabel.Parent = Button
+	ImageLabel.Position = UDim2.new(0, 0, 0.5, 0)
+	ImageLabel.Size = UDim2.new(0.2, 0, 1, 0)
+	ImageLabel.ScaleType = Enum.ScaleType.Fit
+	ImageLabel.AnchorPoint = Vector2.new(0, 0.5)
+	ImageLabel.BackgroundColor3 = Color3.fromRGB(5, 5, 5)
+	ImageLabel.BackgroundTransparency = 0.3
+	ImageLabel.Image = ""
+		
+	local UICorner2 = Instance.new("UICorner")
+	UICorner2.CornerRadius = UDim.new(0, 9)
+	UICorner2.Parent = ImageLabel
 
 	Elements.UIPageLayout.FillDirection = Enum.FillDirection.Horizontal
 	TabList.Template.Visible = false
@@ -2112,79 +2177,21 @@ function RayfieldLibrary:CreateWindow(Settings)
 		function Tab:CreateImageButton(ButtonSettings)
 		    local ButtonValue = {}
 		    local connections = {}
-		
-		    local Button = Instance.new("Frame")
+		    
+		    local Button = Elements.Template.ImageButton:Clone()
+		    Button.BackgroundColor3 = SelectedTheme.ElementBackground
 		    Button.Name = ButtonSettings.Name
 		    Button.Parent = TabPage
-		    Button.Size = UDim2.new(1, -10, 0, 55)
-		    Button.BackgroundColor3 = SelectedTheme.ElementBackground
-		
-		    local UICorner = Instance.new("UICorner")
-		    UICorner.CornerRadius = UDim.new(0, 9)
-		    UICorner.Parent = Button
-		
-		    local UIStroke = Instance.new("UIStroke")
-		    UIStroke.Color = Color3.new(0.196, 0.196, 0.196)
-		    UIStroke.Thickness = 1
-		    UIStroke.Parent = Button
-		
-		    local Title = Instance.new("TextLabel")
-		    Title.Name = "Title"
-		    Title.Parent = Button
-		    Title.Position = UDim2.new(0, 100, 0.5, 0)
-		    Title.Size = UDim2.new(0, 300, 0, 14)
-		    Title.AnchorPoint = Vector2.new(0, 0.5)
-		    Title.BackgroundTransparency = 1
-		    Title.TextXAlignment = Enum.TextXAlignment.Left
-		    Title.Text = ButtonSettings.Name
-		    Title.TextColor3 = Color3.fromRGB(240, 240, 240)
-		    Title.TextSize = 14
-		    Title.Font = Enum.Font.GothamMedium
-		
-		    local ElementIndicator = Instance.new("TextLabel")
-		    ElementIndicator.Name = "ElementIndicator"
-		    ElementIndicator.Parent = Button
-		    ElementIndicator.Position = UDim2.new(1, -10, 0.5, 0)
-		    ElementIndicator.Size = UDim2.new(0, 108, 0, 13)
-		    ElementIndicator.AnchorPoint = Vector2.new(1, 0.5)
-		    ElementIndicator.BackgroundTransparency = 1
-		    ElementIndicator.Text = "button"
-		    ElementIndicator.TextColor3 = Color3.fromRGB(240, 240, 240)
-		    ElementIndicator.TextSize = 14
-		    ElementIndicator.Font = Enum.Font.GothamMedium
-		    ElementIndicator.TextXAlignment = Enum.TextXAlignment.Right
-		    ElementIndicator.TextTransparency = 0.9
-		
-		    local Interact = Instance.new("TextButton")
-		    Interact.Name = "Interact"
-		    Interact.Parent = Button
-		    Interact.TextTransparency = 1
-		    Interact.Size = UDim2.new(1, 0, 1, 0)
-		    Interact.BackgroundTransparency = 1
-		    Interact.ZIndex = 5
-		
-		    local ImageLabel = Instance.new("ImageLabel")
-		    ImageLabel.Name = "ImageLabel"
-		    ImageLabel.Parent = Button
-		    ImageLabel.Position = UDim2.new(0, 0, 0.5, 0)
-		    ImageLabel.Size = UDim2.new(0.2, 0, 1, 0)
-		    ImageLabel.ScaleType = Enum.ScaleType.Fit
-		    ImageLabel.AnchorPoint = Vector2.new(0, 0.5)
-		    ImageLabel.BackgroundColor3 = Color3.fromRGB(5, 5, 5)
-		    ImageLabel.BackgroundTransparency = 0.3
-		    ImageLabel.Image = tostring(ButtonSettings.Img)
-		
-		    local UICorner2 = Instance.new("UICorner")
-		    UICorner2.CornerRadius = UDim.new(0, 9)
-		    UICorner2.Parent = ImageLabel
+		    Button.ImageLabel.Image = tostring(ButtonSettings.Img)
+		    Button.Title.Text = ButtonSettings.Name
 		
 		    Button.BackgroundTransparency = 1
-		    UIStroke.Transparency = 1
-		    Title.TextTransparency = 1
+		    Button.UIStroke.Transparency = 1
+		    Button.Title.TextTransparency = 1
 		
 		    TweenService:Create(Button, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0}):Play()
-		    TweenService:Create(UIStroke, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {Transparency = 0}):Play()
-		    TweenService:Create(Title, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play()
+		    TweenService:Create(Button.UIStroke, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {Transparency = 0}):Play()
+		    TweenService:Create(Button.Title, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play()
 		
 		    -- Click callback
 		    table.insert(connections, Interact.MouseButton1Click:Connect(function()
@@ -2193,37 +2200,37 @@ function RayfieldLibrary:CreateWindow(Settings)
 		
 		        if not Success then
 		            TweenService:Create(Button, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = Color3.fromRGB(85, 0, 0)}):Play()
-		            TweenService:Create(ElementIndicator, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
-		            TweenService:Create(UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
+		            TweenService:Create(Button.ElementIndicator, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
+		            TweenService:Create(Button.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
 		            Title.Text = "Callback Error"
 		            warn("Rayfield | " .. ButtonSettings.Name .. " Callback Error " .. tostring(Response))
 		            task.wait(0.5)
 		            Title.Text = ButtonSettings.Name
 		            TweenService:Create(Button, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
-		            TweenService:Create(ElementIndicator, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {TextTransparency = 0.9}):Play()
-		            TweenService:Create(UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 0}):Play()
+		            TweenService:Create(Button.ElementIndicator, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {TextTransparency = 0.9}):Play()
+		            TweenService:Create(Button.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 0}):Play()
 		        else
 		            if not ButtonSettings.Ext then
 		                SaveConfiguration(ButtonSettings.Name .. "\n")
 		            end
 		            TweenService:Create(Button, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackgroundHover}):Play()
-		            TweenService:Create(ElementIndicator, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
-		            TweenService:Create(UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
+		            TweenService:Create(Button.ElementIndicator, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
+		            TweenService:Create(Button.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
 		            task.wait(0.2)
 		            TweenService:Create(Button, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
-		            TweenService:Create(ElementIndicator, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {TextTransparency = 0.9}):Play()
-		            TweenService:Create(UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 0}):Play()
+		            TweenService:Create(Button.__addElementIndicator, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {TextTransparency = 0.9}):Play()
+		            TweenService:Create(Button.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 0}):Play()
 		        end
 		    end))
 		
 		    table.insert(connections, Button.MouseEnter:Connect(function()
 		        TweenService:Create(Button, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackgroundHover}):Play()
-		        TweenService:Create(ElementIndicator, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {TextTransparency = 0.7}):Play()
+		        TweenService:Create(Button.ElementIndicator, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {TextTransparency = 0.7}):Play()
 		    end))
 		
 		    table.insert(connections, Button.MouseLeave:Connect(function()
 		        TweenService:Create(Button, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
-		        TweenService:Create(ElementIndicator, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {TextTransparency = 0.9}):Play()
+		        TweenService:Create(Button.ElementIndicator, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {TextTransparency = 0.9}):Play()
 		    end))
 		
 		    function ButtonValue:Destroy()
@@ -2242,7 +2249,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 		    end
 		
 		    function ButtonValue:Set(NewButton)
-		        Title.Text = NewButton
+		        Button.Title.Text = NewButton
 		        Button.Name = NewButton
 		    end
 		
