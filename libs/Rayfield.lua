@@ -3871,7 +3871,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 			end)
 			
 			
-			
 			function SliderSettings:Set(NewVal)
 				local NewVal = math.clamp(NewVal, SliderSettings.Range[1], SliderSettings.Range[2])
 
@@ -3912,7 +3911,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 				SliderSettings.Range[1] = NewMin
 				SliderSettings.Range[2] = NewMax
 			
-				-- Clamp current value to new range
 				local NewValue = math.clamp(SliderSettings.CurrentValue, NewMin, NewMax)
 				SliderSettings.CurrentValue = NewValue
 			
@@ -6297,11 +6295,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 	function Window.ModifyTheme(NewTheme)
 		local success = pcall(ChangeTheme, NewTheme)
-		if not success then
-			RayfieldLibrary:Notify({Title = 'Unable to Change Theme', Content = 'We are unable find a theme on file.', Image = 4400704299})
-		else
-			RayfieldLibrary:Notify({Title = 'Theme Changed', Content = 'Successfully changed theme to '..(typeof(NewTheme) == 'string' and NewTheme or 'Custom Theme')..'.', Image = 4483362748})
-		end
 	end
 
 	local success, result = pcall(function()
