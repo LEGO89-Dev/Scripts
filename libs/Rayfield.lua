@@ -4321,6 +4321,10 @@ function RayfieldLibrary:CreateWindow(Settings)
 			return InputBox.Text
 		end
 		
+		function Tab:GetObj()
+			return TabPage
+		end
+		
 		function Tab:SetText(txt)
 			InputBox.Text = txt
 		end
