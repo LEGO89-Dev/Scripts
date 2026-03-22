@@ -5304,16 +5304,15 @@ function RayfieldLibrary:CreateWindow(Settings)
 		function Tab:CreateInbox(ParagraphSettings)
 			local ParagraphValue = {}
 			local debounce = false
-			local Layout = 0
 
 			local Paragraph = Elements.Template.Paragraph:Clone()
 			Paragraph.Title.Text = ParagraphSettings.Title
 			Paragraph.Content.Text = ParagraphSettings.Content
+			Paragraph.Title.LayoutOrder = 0
+			Paragraph.Content.LayoutOrder = 1
 			Paragraph.Visible = true
 			Paragraph.Parent = TabPage.ScrollingFrame
 			Paragraph.BackgroundTransparency = 0
-			Paragraph:WaitForChild("Content").LayoutOrder = Layout
-			Layout = Layout + 1
 
 			Paragraph.UIStroke.Transparency = 1
 			Paragraph.Content.TextTransparency = 1
