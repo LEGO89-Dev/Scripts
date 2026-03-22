@@ -33,7 +33,7 @@ local function loadWithTimeout(url: string, timeout: number?): ...any
 
 	local timeoutThread = task.delay(timeout, function()
 		if not requestCompleted then
-			warn(`Request for {url} timed out after {timeout} seconds`)
+			warn("Request for {url} timed out after {timeout} seconds")
 			task.cancel(requestThread)
 			result = "Request timed out"
 			requestCompleted = true
@@ -49,7 +49,7 @@ local function loadWithTimeout(url: string, timeout: number?): ...any
 		task.cancel(timeoutThread)
 	end
 	if not success then
-		warn(`Failed to process {url}: {result}`)
+		warn("Failed to process {url}: {result}")
 	end
 	return if success then result else nil
 end
@@ -77,12 +77,12 @@ local settingsTable = {
 -- Overridden settings always take precedence over settings in the configuration file, and are cleared if the user changes the setting in the UI
 local overriddenSettings: { [string]: any } = {} -- For example, overriddenSettings["System.rayfieldOpen"] = "J"
 local function overrideSetting(category: string, name: string, value: any)
-	overriddenSettings[`{category}.{name}`] = value
+	overriddenSettings["{category}.{name}"] = value
 end
 
 local function getSetting(category: string, name: string): any
-	if overriddenSettings[`{category}.{name}`] ~= nil then
-		return overriddenSettings[`{category}.{name}`]
+	if overriddenSettings["{category}.{name}"] ~= nil then
+		return overriddenSettings["{category}.{name}"]
 	elseif settingsTable[category][name] ~= nil then
 		return settingsTable[category][name].Value
 	end
@@ -762,7 +762,7 @@ local function getIcon(name : string): {id: number, imageRectSize: Vector2, imag
 	local sizedicons = Icons['48px']
 	local r = sizedicons[name]
 	if not r then
-		error(`Lucide Icons: Failed to find icon by the name of "{name}"`, 2)
+		error("Lucide Icons: Failed to find icon by the name of "{name}"", 2)
 	end
 
 	local rirs = r[2]
@@ -1140,7 +1140,7 @@ local function Hide(notify: boolean?)
 		if useMobilePrompt then 
 			RayfieldLibrary:Notify({Title = "Interface Hidden", Content = "The interface has been hidden, you can unhide the interface by tapping 'Show Rayfield'.", Duration = 7, Image = 4400697855})
 		else
-			RayfieldLibrary:Notify({Title = "Interface Hidden", Content = `The interface has been hidden, you can unhide the interface by tapping {getSetting("General", "rayfieldOpen")}.`, Duration = 7, Image = 4400697855})
+			RayfieldLibrary:Notify({Title = "Interface Hidden", Content = "The interface has been hidden, you can unhide the interface by tapping {getSetting("General", "rayfieldOpen")}.", Duration = 7, Image = 4400697855})
 		end
 	end
 
@@ -1444,7 +1444,7 @@ local function updateSetting(category: string, setting: string, value: any)
 		return
 	end
 	settingsTable[category][setting].Value = value
-	overriddenSettings[`{category}.{setting}`] = nil -- If user changes an overriden setting, remove the override
+	overriddenSettings["{category}.{setting}"] = nil -- If user changes an overriden setting, remove the override
 	saveSettings()
 end
 
@@ -3990,7 +3990,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 	end
 
 
-	function Window:CreateChatTab(Name, Image, Ext, TextHolder, img, ButtonSettings)
+	function Window:CreateChatTab(Name, Image, Ext, TextHolder, img, img2, ButtonSettings)
 		local SDone = false
 		local connections = {}
 		local TabButton = TabList.Template:Clone()
@@ -4148,7 +4148,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 		ImageLabel1.BackgroundTransparency = 1
 		ImageLabel1.Visible = true
 		ImageLabel1.ZIndex = 1
-		ImageLabel1.Image = "rbxassetid://15911231575"
+		ImageLabel1.Image = img2 and img2 or "rbxassetid://15911231575"
 		ImageLabel1.ImageTransparency = 0
 		local UICorner = Instance.new("UICorner")
 		UICorner.Name = "UICorner"
@@ -4190,7 +4190,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 		ImageButton.Size = UDim2.new(0,20,0,20)
 		ImageButton.ZIndex = 10
 		ImageButton.Image = "rbxassetid://4458805208"
-
 		
 		TabPage.Name = Name
 		TabPage.Visible = true
@@ -5293,6 +5292,50 @@ function RayfieldLibrary:CreateWindow(Settings)
 				TextButton.MouseButton1Click:Connect(function()
 					setclipboard(Content.Text)
 				end)
+			end
+
+			return ParagraphValue
+		end
+		
+		function Tab:CreateInbox(ParagraphSettings)
+			local ParagraphValue = {}
+			local debounce = false
+			local Layout = 0
+
+			local Paragraph = Elements.Template.Paragraph:Clone()
+			Paragraph.Title.Text = ParagraphSettings.Title
+			Paragraph.Content.Text = ParagraphSettings.Content
+			Paragraph.Visible = true
+			Paragraph.Parent = TabPage.ScrollingFrame
+			Paragraph.BackgroundTransparency = 0
+			Paragraph:WaitForChild("Content").LayoutOrder = Layout
+			Layout = Layout + 1
+
+			Paragraph.UIStroke.Transparency = 1
+			Paragraph.Content.TextTransparency = 1
+
+			Paragraph.BackgroundColor3 = SelectedTheme.SecondaryElementBackground
+			Paragraph.UIStroke.Color = SelectedTheme.SecondaryElementStroke
+
+			TweenService:Create(Paragraph.UIStroke, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
+			TweenService:Create(Paragraph.Content, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play()	
+
+			function ParagraphValue:Set(NewParagraphSettings)
+				Paragraph.Content.Text = NewParagraphSettings.Content
+			end
+
+			Rayfield.Main:GetPropertyChangedSignal('BackgroundColor3'):Connect(function()
+				if not Paragraph then return end
+				Paragraph2.BackgroundColor3 = SelectedTheme.ElementBackground
+				Paragraph2.UIStroke.Color = SelectedTheme.ElementStroke
+			end)
+			
+			function ParagraphValue:GetDestroy()
+				Paragraph:Destroy()
+			end
+			
+			function ParagraphValue:GetObj()
+				return Paragraph
 			end
 
 			return ParagraphValue
