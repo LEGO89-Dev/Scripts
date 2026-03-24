@@ -2785,6 +2785,10 @@ function RayfieldLibrary:CreateWindow(Settings)
 					Label.Icon.Visible = true
 				end
 			end
+			
+			function LabelValue:Destroy()
+				Label:Destroy()
+			end
 
 			Rayfield.Main:GetPropertyChangedSignal('BackgroundColor3'):Connect(function()
 				Label.BackgroundColor3 = IgnoreTheme and (Color or Label.BackgroundColor3) or SelectedTheme.SecondaryElementBackground
