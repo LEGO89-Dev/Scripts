@@ -749,6 +749,14 @@ local function ChangeTheme(Theme)
 				Element.BackgroundColor3 = SelectedTheme.ElementBackground
 				Element.UIStroke.Color = SelectedTheme.ElementStroke
 			end
+			if Element:IsA("ScrollingFrame") then
+				for i, v in pairs(Element:GetChildren()) do
+					if v.ClassName == "Frame" and v.Name ~= "Placeholder" and v.Name ~= "SectionSpacing" and v.Name ~= "Divider" and v.Name ~= "SectionTitle" and v.Name ~= "SearchTitle-fsefsefesfsefesfesfThanks" then
+						v.BackgroundColor3 = SelectedTheme.ElementBackground
+						v.UIStroke.Color = SelectedTheme.ElementStroke
+					end
+				end
+			end
 		end
 	end
 end
