@@ -2786,7 +2786,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 				end
 			end
 			
-			function LabelValue:Destroy()
+			function LabelValue:GetDestroy()
 				Label:Destroy()
 			end
 
