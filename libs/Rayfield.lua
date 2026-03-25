@@ -2786,7 +2786,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 				end
 			end
 			
-			function LabelValue:GetDestroy()
+			function LabelValue:Destroy()
 				Label:Destroy()
 			end
 
@@ -4956,6 +4956,10 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 					Label.Icon.Visible = true
 				end
+			end
+			
+			function LabelValue:Destroy()
+				Label:Destroy()
 			end
 
 			Rayfield.Main:GetPropertyChangedSignal('BackgroundColor3'):Connect(function()
