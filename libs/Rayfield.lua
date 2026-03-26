@@ -5015,6 +5015,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 				TextLabel.AnchorPoint = Vector2.new(0, 0.5)
 				TextLabel.TextSize = 14
 				TextLabel.BackgroundTransparency = 1
+				TextLabel.TextColor3 = Color3.new(1,1,1)
 				TextLabel.Text = v.Text
 				TextLabel.Name = "Text"..i
 			end
