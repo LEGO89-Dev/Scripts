@@ -5008,6 +5008,8 @@ function RayfieldLibrary:CreateWindow(Settings)
 			for i, v in pairs(Texts) do
 				local TextLabel = Instance.new("TextLabel")
 				TextLabel.Parent = Frame
+				TextLabel.TextXAlignment = Enum.TextXAlignment.Left
+				TextLabel.Font = Enum.Font.GothamMedium
 				TextLabel.Size = UDim2.new(0, v.SizeX, 1, 0)
 				TextLabel.Position = UDim2.new(0, v.PositionX, 0.5, 0)
 				TextLabel.AnchorPoint = Vector2.new(0, 0.5)
