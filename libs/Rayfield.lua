@@ -4989,6 +4989,88 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 			return LabelValue
 		end
+		
+		function Tab:CreateValueLabel(Icon, Color, IgnoreTheme, Texts)
+			local LabelValue = {}
+
+			local Label = Elements.Template.Label:Clone()
+			Label.Title:Destroy()
+			Label.Visible = true
+			Label.Parent = TabPage.ScrollingFrame
+
+			local Frame = Instance.new("Frame")
+			Frame.Parent = Label
+			Frame.Size = UDim2.new(1, -100, 0, 14)
+			Frame.Position = UDim2.new(0, 45, 0.5, 0)
+			Frame.AnchorPoint = Vector2.new(0, 0.5)
+			Frame.BackgroundTransparency = 1
+			
+			for i, v in pairs(Texts) do
+				local TextLabel = Instance.new("TextLabel")
+				TextLabel.Parent = Frame
+				TextLabel.Size = UDim2.new(0, v.SizeX, 1, 0)
+				TextLabel.Position = UDim2.new(0, v.PositionX, 0.5, 0)
+				TextLabel.AnchorPoint = Vector2.new(0, 0.5)
+				TextLabel.TextSize = 14
+				TextLabel.BackgroundTransparency = 1
+				TextLabel.Text = v.Text
+				TextLabel.Name = "Text"..i
+			end
+
+			Label.BackgroundColor3 = Color or SelectedTheme.SecondaryElementBackground
+			Label.UIStroke.Color = Color or SelectedTheme.SecondaryElementStroke
+
+			if Icon then
+				if typeof(Icon) == 'string' and Icons then
+					local asset = getIcon(Icon)
+
+					Label.Icon.Image = 'rbxassetid://'..asset.id
+					Label.Icon.ImageRectOffset = asset.imageRectOffset
+					Label.Icon.ImageRectSize = asset.imageRectSize
+				else
+					Label.Icon.Image = getAssetUri(Icon)
+				end
+			else
+				Label.Icon.Image = "rbxassetid://" .. 0
+			end
+
+			if Icon and Label:FindFirstChild('Icon') then
+				if Icon then
+					if typeof(Icon) == 'string' and Icons then
+						local asset = getIcon(Icon)
+
+						Label.Icon.Image = 'rbxassetid://'..asset.id
+						Label.Icon.ImageRectOffset = asset.imageRectOffset
+						Label.Icon.ImageRectSize = asset.imageRectSize
+					else
+						Label.Icon.Image = getAssetUri(Icon)
+					end
+				else
+					Label.Icon.Image = "rbxassetid://" .. 0
+				end
+
+				Label.Icon.Visible = true
+			end
+
+			Label.Icon.ImageTransparency = 1
+			Label.BackgroundTransparency = 1
+			Label.UIStroke.Transparency = 1
+
+			TweenService:Create(Label, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {BackgroundTransparency = Color and 0.8 or 0}):Play()
+			TweenService:Create(Label.UIStroke, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {Transparency = Color and 0.7 or 0}):Play()
+			TweenService:Create(Label.Icon, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {ImageTransparency = 0.2}):Play()
+			
+			function LabelValue:Destroy()
+				Label:Destroy()
+			end
+
+			Rayfield.Main:GetPropertyChangedSignal('BackgroundColor3'):Connect(function()
+				Label.BackgroundColor3 = IgnoreTheme and (Color or Label.BackgroundColor3) or SelectedTheme.SecondaryElementBackground
+				Label.UIStroke.Color = IgnoreTheme and (Color or Label.BackgroundColor3) or SelectedTheme.SecondaryElementStroke
+			end)
+
+			return LabelValue
+		end
 
 		-- Paragraph
 		function Tab:CreateParagraph(ParagraphSettings)
