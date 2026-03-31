@@ -3057,18 +3057,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 					DropdownOption.UIStroke.Transparency = 1
 					DropdownOption.Title.TextTransparency = 1
 
-					--local Dropdown = Tab:CreateDropdown({
-					--	Name = "Dropdown Example",
-					--	Options = {"Option 1","Option 2"},
-					--	CurrentOption = {"Option 1"},
-					--  MultipleOptions = true,
-					--	Flag = "Dropdown1",
-					--	Callback = function(TableOfOptions)
-
-					--	end,
-					--})
-
-
 					DropdownOption.Interact.ZIndex = 50
 					DropdownOption.Interact.MouseButton1Click:Connect(function()
 						if not DropdownSettings.MultipleOptions and table.find(DropdownSettings.CurrentOption, Option) then 
@@ -3112,9 +3100,9 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 						local Success, Response = pcall(function()
 							if not DropdownSettings.MultipleOptions then
-							DropdownSettings.Callback(DropdownSettings.CurrentOption[1])
+							DropdownSettings.Callback(DropdownSettings.CurrentOption[1], false)
 						else
-							DropdownSettings.Callback(DropdownSettings.CurrentOption)
+							DropdownSettings.Callback(DropdownSettings.CurrentOption, false)
 						end
 						end)
 
@@ -3205,9 +3193,9 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 				local Success, Response = pcall(function()
 					if not DropdownSettings.MultipleOptions then
-						DropdownSettings.Callback(DropdownSettings.CurrentOption[1])
+						DropdownSettings.Callback(DropdownSettings.CurrentOption[1], true)
 					else
-						DropdownSettings.Callback(DropdownSettings.CurrentOption)
+						DropdownSettings.Callback(DropdownSettings.CurrentOption, true)
 					end
 				end)
 				if not Success then
