@@ -5311,7 +5311,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 				Frame.Size = UDim2.new(1, -10, 0, 50)
 				Frame.AnchorPoint = Vector2.new(0, 0)
 				Frame.BackgroundColor3 = Color3.new(0.0784313753247261, 0.0784313753247261, 0.0784313753247261)
-				Frame.BackgroundTransparency = 0.5
+				Frame.BackgroundTransparency = 0
 				Frame.AutomaticSize = Enum.AutomaticSize.Y
 				Frame.Visible = true
 				Frame.ZIndex = 1
@@ -5349,7 +5349,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 				Frame_2.Size = UDim2.new(1, 0, 0, 35)
 				Frame_2.AnchorPoint = Vector2.new(0, 0)
 				Frame_2.BackgroundColor3 = Color3.new(0.11764705926179886, 0.11764705926179886, 0.11764705926179886)
-				Frame_2.BackgroundTransparency = 1
+				Frame_2.BackgroundTransparency = 0
 				Frame_2.Visible = true
 				Frame_2.ZIndex = 1
 				Frame_2.LayoutOrder = 1
@@ -5363,10 +5363,10 @@ function RayfieldLibrary:CreateWindow(Settings)
 				TextButton.BackgroundTransparency = 1
 				TextButton.Visible = true
 				TextButton.ZIndex = 1
-				TextButton.Text = [[Copy Code]]
+				TextButton.Text = [[Copy code]]
 				TextButton.TextColor3 = Color3.new(1, 1, 1)
-				TextButton.TextSize = 13
-				TextButton.Font = Enum.Font.GothamSemibold
+				TextButton.TextSize = 8
+				TextButton.Font = Enum.Font.Legacy
 				TextButton.TextScaled = false
 				local UICorner_2 = Instance.new("UICorner")
 				UICorner_2.Name = "UICorner"
@@ -5385,7 +5385,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 				Script.Text = CodeBoxValue.CodeType
 				Script.TextColor3 = Color3.new(0.9411764740943909, 0.9411764740943909, 0.9411764740943909)
 				Script.TextSize = 13
-				Script.Font = Enum.Font.GothamSemibold
+				Script.Font = Enum.Font.GothamMedium
 				Script.TextScaled = false
 				local UIListLayout = Instance.new("UIListLayout")
 				UIListLayout.Name = "UIListLayout"
@@ -5393,42 +5393,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 				UIListLayout.FillDirection = Enum.FillDirection.Vertical
 				UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 				UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-
-				local normalSize = TextButton.Size
-				local hoverSize = UDim2.new(normalSize.X.Scale, normalSize.X.Offset + 1, normalSize.Y.Scale, normalSize.Y.Offset + 1)
-				local clickSize = UDim2.new(normalSize.X.Scale, normalSize.X.Offset - 1, normalSize.Y.Scale, normalSize.Y.Offset - 1)
-				
-				local tweenInfo = TweenInfo.new(0.12, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
-				
-				local function tween(props)
-					TweenService:Create(TextButton, tweenInfo, props):Play()
-				end
-				
-				TextButton.MouseEnter:Connect(function()
-					tween({
-						TextColor3 = Color3.fromRGB(200, 200, 255),
-						Size = hoverSize
-					})
-				end)
-				
-				TextButton.MouseLeave:Connect(function()
-					tween({
-						TextColor3 = Color3.fromRGB(255, 255, 255),
-						Size = normalSize
-					})
-				end)
-				
-				TextButton.MouseButton1Down:Connect(function()
-					tween({
-						Size = clickSize
-					})
-				end)
-				
-				TextButton.MouseButton1Up:Connect(function()
-					tween({
-						Size = hoverSize
-					})
-				end)
 				
 				TextButton.MouseButton1Click:Connect(function()
 					setclipboard(Content.Text)
