@@ -5310,34 +5310,40 @@ function RayfieldLibrary:CreateWindow(Settings)
 				Frame.Position = UDim2.new(0, 0, 0, 0)
 				Frame.Size = UDim2.new(1, -10, 0, 50)
 				Frame.AnchorPoint = Vector2.new(0, 0)
-				Frame.BackgroundColor3 = Color3.new(0.0784313753247261, 0.0784313753247261, 0.0784313753247261)
 				Frame.BackgroundTransparency = 0
 				Frame.AutomaticSize = Enum.AutomaticSize.Y
 				Frame.Visible = true
 				Frame.ZIndex = 1
 				Frame.LayoutOrder = Layout
+				Frame.BackgroundColor3 = Color3.fromRGB(25, 25, 30)
+
+				local stroke = Instance.new("UIStroke")
+				stroke.Color = Color3.fromRGB(60, 60, 80)
+				stroke.Transparency = 0.5
+				stroke.Thickness = 1
+				stroke.Parent = Frame
 				Layout = Layout + 1
 				local Content = Instance.new("TextLabel")
 				Content.Name = "Content"
 				Content.Parent = Frame
-				Content.Position = UDim2.new(1, -10, 0.5, 0)
-				Content.Size = UDim2.new(0, 438, 0, 0)
-				Content.AnchorPoint = Vector2.new(1, 0.5)
-				Content.BackgroundColor3 = Color3.new(1, 1, 1)
+				Content.Position = UDim2.new(0, 0, 0, 35)
+				Content.Size = UDim2.new(1, 0, 0, 0)
 				Content.BackgroundTransparency = 1
-				Content.Visible = true
-				Content.ZIndex = 1
 				Content.Text = CodeBoxValue.Content
-				Content.TextColor3 = Color3.new(0.9411764740943909, 0.9411764740943909, 0.9411764740943909)
+				Content.TextColor3 = Color3.fromRGB(230, 230, 230)
 				Content.TextSize = 13
 				Content.Font = Enum.Font.Code
-				Content.TextScaled = false
-				Content.LayoutOrder = 2
-				Content.AutomaticSize = Enum.AutomaticSize.Y
 				Content.TextWrapped = true
 				Content.RichText = true
 				Content.TextXAlignment = Enum.TextXAlignment.Left
 				Content.TextYAlignment = Enum.TextYAlignment.Top
+				Content.AutomaticSize = Enum.AutomaticSize.Y
+				local padding = Instance.new("UIPadding")
+				padding.PaddingTop = UDim.new(0, 8)
+				padding.PaddingBottom = UDim.new(0, 8)
+				padding.PaddingLeft = UDim.new(0, 10)
+				padding.PaddingRight = UDim.new(0, 10)
+				padding.Parent = Content
 				local UICorner = Instance.new("UICorner")
 				UICorner.Name = "UICorner"
 				UICorner.Parent = Frame
@@ -5345,8 +5351,8 @@ function RayfieldLibrary:CreateWindow(Settings)
 				local Frame_2 = Instance.new("Frame")
 				Frame_2.Name = "Frame"
 				Frame_2.Parent = Frame
-				Frame_2.Position = UDim2.new(0.5, 0, 0, 0)
-				Frame_2.Size = UDim2.new(1, 0, 0, 35)
+				Frame_2.Size = UDim2.new(1, 0, 0, 30)
+				Frame_2.BackgroundColor3 = Color3.fromRGB(30, 30, 35)
 				Frame_2.AnchorPoint = Vector2.new(0, 0)
 				Frame_2.BackgroundColor3 = Color3.new(0.11764705926179886, 0.11764705926179886, 0.11764705926179886)
 				Frame_2.BackgroundTransparency = 0
@@ -5363,11 +5369,15 @@ function RayfieldLibrary:CreateWindow(Settings)
 				TextButton.BackgroundTransparency = 1
 				TextButton.Visible = true
 				TextButton.ZIndex = 1
-				TextButton.Text = [[Copy code]]
+				TextButton.Text = [[Copy Code]]
 				TextButton.TextColor3 = Color3.new(1, 1, 1)
-				TextButton.TextSize = 8
-				TextButton.Font = Enum.Font.Legacy
+				TextButton.TextSize = 13
+				TextButton.Font = Enum.Font.GothamSemibold
 				TextButton.TextScaled = false
+				TextButton.Size = UDim2.new(0, 70, 0, 18)
+				TextButton.Text = "Copy"
+				TextButton.TextSize = 12
+				TextButton.Font = Enum.Font.GothamSemibold
 				local UICorner_2 = Instance.new("UICorner")
 				UICorner_2.Name = "UICorner"
 				UICorner_2.Parent = Frame_2
@@ -5385,7 +5395,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 				Script.Text = CodeBoxValue.CodeType
 				Script.TextColor3 = Color3.new(0.9411764740943909, 0.9411764740943909, 0.9411764740943909)
 				Script.TextSize = 13
-				Script.Font = Enum.Font.GothamMedium
+				Script.Font = Enum.Font.GothamSemibold
 				Script.TextScaled = false
 				local UIListLayout = Instance.new("UIListLayout")
 				UIListLayout.Name = "UIListLayout"
@@ -5393,6 +5403,42 @@ function RayfieldLibrary:CreateWindow(Settings)
 				UIListLayout.FillDirection = Enum.FillDirection.Vertical
 				UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 				UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+
+				local normalSize = TextButton.Size
+				local hoverSize = UDim2.new(normalSize.X.Scale, normalSize.X.Offset + 1, normalSize.Y.Scale, normalSize.Y.Offset + 1)
+				local clickSize = UDim2.new(normalSize.X.Scale, normalSize.X.Offset - 1, normalSize.Y.Scale, normalSize.Y.Offset - 1)
+				
+				local tweenInfo = TweenInfo.new(0.12, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+				
+				local function tween(props)
+					TweenService:Create(TextButton, tweenInfo, props):Play()
+				end
+				
+				TextButton.MouseEnter:Connect(function()
+					tween({
+						TextColor3 = Color3.fromRGB(200, 200, 255),
+						Size = hoverSize
+					})
+				end)
+				
+				TextButton.MouseLeave:Connect(function()
+					tween({
+						TextColor3 = Color3.fromRGB(255, 255, 255),
+						Size = normalSize
+					})
+				end)
+				
+				TextButton.MouseButton1Down:Connect(function()
+					tween({
+						Size = clickSize
+					})
+				end)
+				
+				TextButton.MouseButton1Up:Connect(function()
+					tween({
+						Size = hoverSize
+					})
+				end)
 				
 				TextButton.MouseButton1Click:Connect(function()
 					setclipboard(Content.Text)
