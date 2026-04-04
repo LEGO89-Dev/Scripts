@@ -4013,6 +4013,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 		InputBox.ZIndex = 7
 		InputBox.Text = [[]]
 		InputBox.MultiLine = true
+		InputBox.TextWrapped = true
 		InputBox.AutomaticSize = Enum.AutomaticSize.Y
 		InputBox.ClearTextOnFocus = false
 		InputBox.PlaceholderText = TextHolder
@@ -4160,7 +4161,8 @@ function RayfieldLibrary:CreateWindow(Settings)
 		TabPage.Visible = true
 		
 		InputBox:GetPropertyChangedSignal("Text"):Connect(function()
-			Input.Size = UDim2.new(1, -10, 0, math.clamp(InputBox.AbsoluteSize.Y, 0, 100) + SizePag)
+			local textHeight = InputBox.TextBounds.Y
+			Input.Size = UDim2.new(1, -10, 0, math.clamp(textHeight, 0, 100) + SizePag)
 		end)
 
 		TabPage.LayoutOrder = #Elements:GetChildren() or Ext and 10000
