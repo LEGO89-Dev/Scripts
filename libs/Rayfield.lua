@@ -4121,7 +4121,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 		EditShow.Parent = Input
 		EditShow.Active = true
 		EditShow.BackgroundTransparency = 0.9
-		EditShow.BackgroundColor3 = Color.new(1,1,1)
+		EditShow.BackgroundColor3 = Color3.new(1,1,1)
 		EditShow.Position = UDim2.new(0,10,0,10)
 		EditShow.Size = UDim2.new(0.27,10,0,23)
 		EditShow.ZIndex = 5
