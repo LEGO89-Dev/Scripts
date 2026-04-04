@@ -766,8 +766,8 @@ Topbar.Settings.Image = "rbxassetid://96532016886427"
 Topbar.Search.Image = "rbxassetid://118685771787843"
 Topbar.ChangeSize.Image = "rbxassetid://90434151822042"
 
-Search.ImageRectOffset = Vector2.new(0,0)
-Search.ImageRectSize = Vector2.new(0,0)
+Topbar.Search.ImageRectOffset = Vector2.new(0,0)
+Topbar.Search.ImageRectSize = Vector2.new(0,0)
 
 local function getIcon(name : string): {id: number, imageRectSize: Vector2, imageRectOffset: Vector2}
 	if not Icons then
