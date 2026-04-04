@@ -3950,7 +3950,9 @@ function RayfieldLibrary:CreateWindow(Settings)
 		TabButton.Parent = TabList
 		TabButton.Title.TextWrapped = false
 		TabButton.Size = UDim2.new(0, TabButton.Title.TextBounds.X + 30, 0, 30)
-
+		
+		local SizePag = 10
+		
 		if Image and Image ~= 0 then
 			if typeof(Image) == 'string' and Icons then
 				local asset = getIcon(Image)
@@ -3984,6 +3986,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 		TabPage.AnchorPoint = Vector2.new(0.5, 0.5)
 		TabPage.BackgroundColor3 = Color3.new(0.6392157077789307, 0.6352941393852234, 0.6470588445663452)
 		TabPage.BackgroundTransparency = 1
+		
 		local Input = Instance.new("Frame", TabPage)
 		Input.Name = "Input"
 		Input.Position = UDim2.new(0.5, 0, 1, 0)
@@ -3992,36 +3995,31 @@ function RayfieldLibrary:CreateWindow(Settings)
 		Input.BackgroundColor3 = Color3.new(0.13725490868091583, 0.13725490868091583, 0.13725490868091583)
 		Input.BackgroundTransparency = 0
 		Input.ZIndex = 5
+		
 		local UICorner = Instance.new("UICorner", Input)
 		UICorner.CornerRadius = UDim.new(0, 9)
+		
 		local UIStroke = Instance.new("UIStroke", Input)
 		UIStroke.Color = Color3.new(0.19607843458652496, 0.19607843458652496, 0.19607843458652496)
-		local InputFrame = Instance.new("Frame", Input)
-		InputFrame.Name = "InputFrame"
-		InputFrame.Position = UDim2.new(1, -50, 1, -20)
-		InputFrame.Size = UDim2.new(1, -60, 0, 30)
-		InputFrame.AnchorPoint = Vector2.new(1, 0.5)
-		InputFrame.BackgroundColor3 = SelectedTheme.ElementBackground
-		InputFrame.ZIndex = 6
-		local InputBox = Instance.new("TextBox", InputFrame)
+		
+		local InputBox = Instance.new("TextBox", Input)
 		InputBox.Name = "InputBox"
 		InputBox.TextXAlignment = Enum.TextXAlignment.Left
-		InputBox.Position = UDim2.new(0.5, 0, 0.5, 0)
-		InputBox.Size = UDim2.new(1, -15, 0, 14)
-		InputBox.AnchorPoint = Vector2.new(0.5, 0.5)
+		InputBox.Position = UDim2.new(1, -50, 1, -5)
+		InputBox.Size = UDim2.new(1, -60, 0, 30)
+		InputBox.AnchorPoint = Vector2.new(1, 1)
 		InputBox.BackgroundColor3 = SelectedTheme.ElementBackground
 		InputBox.BackgroundTransparency = 1
 		InputBox.ZIndex = 7
 		InputBox.Text = [[]]
+		InputBox.MultiLine = true
+		InputBox.AutomaticSize = Enum.AutomaticSize.Y
 		InputBox.ClearTextOnFocus = false
 		InputBox.PlaceholderText = TextHolder
 		InputBox.TextColor3 = Color3.new(0.9411764740943909, 0.9411764740943909, 0.9411764740943909)
 		InputBox.TextSize = 14
 		InputBox.Font = Enum.Font.GothamMedium
-		local UIStroke_2 = Instance.new("UIStroke", InputFrame)
-		UIStroke_2.Color = Color3.new(0.2549019753932953, 0.2549019753932953, 0.2549019753932953)
-		local UICorner_2 = Instance.new("UICorner", InputFrame)
-		UICorner_2.CornerRadius = UDim.new(0, 10)
+		
 		local Button = Instance.new("Frame", Input)
 		Button.Name = "Button"
 		Button.Position = UDim2.new(1, -25, 1, -20)
@@ -4029,10 +4027,13 @@ function RayfieldLibrary:CreateWindow(Settings)
 		Button.AnchorPoint = Vector2.new(0.5, 0.5)
 		Button.BackgroundColor3 = SelectedTheme.ElementBackground
 		Button.ZIndex = 6
+		
 		local UICorner_3 = Instance.new("UICorner", Button)
 		UICorner_3.CornerRadius = UDim.new(0, 9)
+		
 		local UIStroke_3 = Instance.new("UIStroke", Button)
 		UIStroke_3.Color = Color3.new(0.2549019753932953, 0.2549019753932953, 0.2549019753932953)
+		
 		local Interact = Instance.new("TextButton", Button)
 		Interact.Name = "Interact"
 		Interact.Position = UDim2.new(0.5, 0, 0.5, 0)
@@ -4041,10 +4042,8 @@ function RayfieldLibrary:CreateWindow(Settings)
 		Interact.BackgroundColor3 = SelectedTheme.ElementBackground
 		Interact.BackgroundTransparency = 1
 		Interact.ZIndex = 9
-		Interact.Text = [[]]
-		Interact.TextColor3 = Color3.new(0, 0, 0)
-		Interact.TextSize = 14
-		Interact.Font = Enum.Font.SourceSans
+		Interact.Text = ""
+		
 		local ImageLabel = Instance.new("ImageLabel")
 		ImageLabel.Size = UDim2.new(0.9, 0, 0.9, 0)
 		ImageLabel.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -4054,6 +4053,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 		ImageLabel.ScaleType = Enum.ScaleType.Fit
 		ImageLabel.Image = img
 		ImageLabel.Parent = Interact
+		
 		local ScrollingFrame = Instance.new("ScrollingFrame", TabPage)
 		ScrollingFrame.ScrollBarImageTransparency = 1
 		ScrollingFrame.ScrollBarThickness = 0
@@ -4063,10 +4063,12 @@ function RayfieldLibrary:CreateWindow(Settings)
 		ScrollingFrame.Size = UDim2.new(1, 0, 0.75, 0)
 		ScrollingFrame.AnchorPoint = Vector2.new(0.5, 0.5)
 		ScrollingFrame.BackgroundTransparency = 1
+		
 		local UIListLayout = Instance.new("UIListLayout", ScrollingFrame)
 		UIListLayout.FillDirection = Enum.FillDirection.Vertical
 		UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 		UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+		
 		local SectionSpacing = Instance.new("Frame", ScrollingFrame)
 		SectionSpacing.Name = "SectionSpacing"
 		SectionSpacing.Position = UDim2.new(0, 0, 0.48091602325439453, 0)
@@ -4074,6 +4076,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 		SectionSpacing.AnchorPoint = Vector2.new(0, 0)
 		SectionSpacing.BackgroundColor3 = Color3.new(1, 1, 1)
 		SectionSpacing.BackgroundTransparency = 1
+		
 		local TextButton = Instance.new("TextButton")
 		TextButton.Name = "TextButton"
 		TextButton.Parent = TabPage
@@ -4089,6 +4092,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 		TextButton.TextSize = 8
 		TextButton.Font = Enum.Font.Legacy
 		TextButton.TextScaled = false
+		
 		local ImageLabel1 = Instance.new("ImageLabel")
 		ImageLabel1.Name = "ImageLabel"
 		ImageLabel1.Parent = TextButton
@@ -4101,10 +4105,12 @@ function RayfieldLibrary:CreateWindow(Settings)
 		ImageLabel1.ZIndex = 1
 		ImageLabel1.Image = img2 and img2 or "rbxassetid://15911231575"
 		ImageLabel1.ImageTransparency = 0
+		
 		local UICorner = Instance.new("UICorner")
 		UICorner.Name = "UICorner"
 		UICorner.Parent = ImageLabel1
 		UICorner.CornerRadius = UDim.new(0.5, 0)
+		
 		local UICorner_2 = Instance.new("UICorner")
 		UICorner_2.Name = "UICorner"
 		UICorner_2.Parent = TextButton
@@ -4114,11 +4120,17 @@ function RayfieldLibrary:CreateWindow(Settings)
 		EditShow.Name = "EditShow"
 		EditShow.Parent = Input
 		EditShow.Active = true
-		EditShow.BackgroundTransparency = 1
+		EditShow.BackgroundTransparency = 0.9
+		EditShow.BackgroundColor3 = Color.new(1,1,1)
 		EditShow.Position = UDim2.new(0,10,0,10)
-		EditShow.Size = UDim2.new(0.27000001072883606,0,0,10)
+		EditShow.Size = UDim2.new(0.27,10,0,23)
 		EditShow.ZIndex = 5
 		EditShow.Visible = false
+		
+		local UICorner_2 = Instance.new("UICorner")
+		UICorner_3.Name = "UICorner"
+		UICorner_3.Parent = TextButton
+		UICorner_3.CornerRadius = UDim.new(0, 9)
 		
 		local TextLabel = Instance.new("TextLabel")
 		TextLabel.Name = "TextLabel"
@@ -4126,9 +4138,10 @@ function RayfieldLibrary:CreateWindow(Settings)
 		TextLabel.Active = true
 		TextLabel.BackgroundTransparency = 1
 		TextLabel.Size = UDim2.new(0.5,0,1,0)
+		TextLabel.Position = UDim2.new(0.5,0,0,0)
 		TextLabel.ZIndex = 10
-		TextLabel.Text = "Editing Message"
-		TextLabel.TextColor3 = Color3.new(1,1,1)
+		TextLabel.Text = "Editing message"
+		TextLabel.TextColor3 = Color3.frkmRGB(0, 85, 255)
 		TextLabel.TextSize = 10
 		TextLabel.TextXAlignment = Enum.TextXAlignment.Left
 		
@@ -4137,13 +4150,18 @@ function RayfieldLibrary:CreateWindow(Settings)
 		ImageButton.Parent = EditShow
 		ImageButton.AnchorPoint = Vector2.new(1,0.5)
 		ImageButton.BackgroundTransparency = 1
-		ImageButton.Position = UDim2.new(1,0,0.5,0)
-		ImageButton.Size = UDim2.new(0,20,0,20)
+		ImageButton.Position = UDim2.new(1,-5,0.5,0)
+		ImageButton.Size = UDim2.new(0,15,0,15)
+		ImageButton.ImageColor3 = Color3.frkmRGB(0, 85, 255)
 		ImageButton.ZIndex = 10
 		ImageButton.Image = "rbxassetid://4458805208"
 		
 		TabPage.Name = Name
 		TabPage.Visible = true
+		
+		InputBox:GetPropertyChangedSignal("Text"):Connect(function()
+			Input.Size = UDim2.new(1, -10, 0, math.clamp(InputBox.AbsoluteSize.Y, 0, 100) + SizePag)
+		end)
 
 		TabPage.LayoutOrder = #Elements:GetChildren() or Ext and 10000
 
@@ -4177,8 +4195,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 			TabButton.Title.TextColor3 = SelectedTheme.TabTextColor
 		end
 
-
-		-- Animate
 		task.wait(0.1)
 		if FirstTab or Ext then
 			TabButton.BackgroundColor3 = SelectedTheme.TabBackground
