@@ -5146,7 +5146,10 @@ function RayfieldLibrary:CreateWindow(Settings)
 					UICorner.Parent = TextButton
 					
 					TextButton.MouseButton1Click:Connect(function()
-						pcall(v.Callback)
+						local a, e = pcall(v.Callback)
+						if e then
+							print(e)
+						end
 						TweenService:Create(TextButton, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0}):Play()
 			            task.wait(0.5)
 			            TweenService:Create(TextButton, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {BackgroundTransparency = 1}):Play()
