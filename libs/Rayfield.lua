@@ -4141,7 +4141,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 		TextLabel.Position = UDim2.new(0.5,0,0,0)
 		TextLabel.ZIndex = 10
 		TextLabel.Text = "Editing message"
-		TextLabel.TextColor3 = Color3.frkmRGB(0, 85, 255)
+		TextLabel.TextColor3 = Color3.fromRGB(0, 85, 255)
 		TextLabel.TextSize = 10
 		TextLabel.TextXAlignment = Enum.TextXAlignment.Left
 		
@@ -4152,7 +4152,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 		ImageButton.BackgroundTransparency = 1
 		ImageButton.Position = UDim2.new(1,-5,0.5,0)
 		ImageButton.Size = UDim2.new(0,15,0,15)
-		ImageButton.ImageColor3 = Color3.frkmRGB(0, 85, 255)
+		ImageButton.ImageColor3 = Color3.fromRGB(0, 85, 255)
 		ImageButton.ZIndex = 10
 		ImageButton.Image = "rbxassetid://4458805208"
 		
