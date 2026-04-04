@@ -4127,7 +4127,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 		EditShow.ZIndex = 5
 		EditShow.Visible = false
 		
-		local UICorner_2 = Instance.new("UICorner")
+		local UICorner_3 = Instance.new("UICorner")
 		UICorner_3.Name = "UICorner"
 		UICorner_3.Parent = TextButton
 		UICorner_3.CornerRadius = UDim.new(0, 9)
