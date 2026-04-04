@@ -761,6 +761,25 @@ local function ChangeTheme(Theme)
 	end
 end
 
+--[[
+hide rbxassetid://10152135063
+setting rbxassetid://96532016886427
+search rbxassetid://118685771787843
+change size rbxassetid://90434151822042
+drop down rbxassetid://12338898398
+
+ImageRectOffset = Vector2.new(0,0)
+ImageRectSize = Vector2.new(0,0)
+--]]
+
+Topbar.Hide.Image = "rbxassetid://10152135063"
+Topbar.Setting.Image = "rbxassetid://96532016886427"
+Topbar.Search.Image = "rbxassetid://118685771787843"
+Topbar.ChangeSize.Image = "rbxassetid://90434151822042"
+
+Search.ImageRectOffset = Vector2.new(0,0)
+Search.ImageRectSize = Vector2.new(0,0)
+
 local function getIcon(name : string): {id: number, imageRectSize: Vector2, imageRectOffset: Vector2}
 	if not Icons then
 		warn("Lucide Icons: Cannot use icons as icons library is not loaded")
@@ -2976,6 +2995,9 @@ function RayfieldLibrary:CreateWindow(Settings)
 			end
 
 			Dropdown.Toggle.ImageColor3 = SelectedTheme.TextColor
+			Dropdown.Toggle.Image = "rbxassetid://12338898398"
+			Dropdown.Toggle.ImageRectOffset = Vector2.new(0,0)
+			Dropdown.Toggle.ImageRectSize = Vector2.new(0,0)
 			TweenService:Create(Dropdown, TweenInfo.new(0.4, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
 
 			Dropdown.BackgroundTransparency = 1
@@ -5311,7 +5333,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 				Frame.Size = UDim2.new(1, -10, 0, 50)
 				Frame.AnchorPoint = Vector2.new(0, 0)
 				Frame.BackgroundColor3 = Color3.new(0.0784313753247261, 0.0784313753247261, 0.0784313753247261)
-				Frame.BackgroundTransparency = 0
+				Frame.BackgroundTransparency = 0.5
 				Frame.AutomaticSize = Enum.AutomaticSize.Y
 				Frame.Visible = true
 				Frame.ZIndex = 1
@@ -5349,7 +5371,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 				Frame_2.Size = UDim2.new(1, 0, 0, 35)
 				Frame_2.AnchorPoint = Vector2.new(0, 0)
 				Frame_2.BackgroundColor3 = Color3.new(0.11764705926179886, 0.11764705926179886, 0.11764705926179886)
-				Frame_2.BackgroundTransparency = 0
+				Frame_2.BackgroundTransparency = 1
 				Frame_2.Visible = true
 				Frame_2.ZIndex = 1
 				Frame_2.LayoutOrder = 1
@@ -5363,10 +5385,10 @@ function RayfieldLibrary:CreateWindow(Settings)
 				TextButton.BackgroundTransparency = 1
 				TextButton.Visible = true
 				TextButton.ZIndex = 1
-				TextButton.Text = [[Copy code]]
+				TextButton.Text = [[Copy Code]]
 				TextButton.TextColor3 = Color3.new(1, 1, 1)
-				TextButton.TextSize = 8
-				TextButton.Font = Enum.Font.Legacy
+				TextButton.TextSize = 13
+				TextButton.Font = Enum.Font.GothamSemibold
 				TextButton.TextScaled = false
 				local UICorner_2 = Instance.new("UICorner")
 				UICorner_2.Name = "UICorner"
@@ -5385,7 +5407,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 				Script.Text = CodeBoxValue.CodeType
 				Script.TextColor3 = Color3.new(0.9411764740943909, 0.9411764740943909, 0.9411764740943909)
 				Script.TextSize = 13
-				Script.Font = Enum.Font.GothamMedium
+				Script.Font = Enum.Font.GothamSemibold
 				Script.TextScaled = false
 				local UIListLayout = Instance.new("UIListLayout")
 				UIListLayout.Name = "UIListLayout"
@@ -5393,6 +5415,42 @@ function RayfieldLibrary:CreateWindow(Settings)
 				UIListLayout.FillDirection = Enum.FillDirection.Vertical
 				UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 				UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+
+				local normalSize = TextButton.Size
+				local hoverSize = UDim2.new(normalSize.X.Scale, normalSize.X.Offset + 1, normalSize.Y.Scale, normalSize.Y.Offset + 1)
+				local clickSize = UDim2.new(normalSize.X.Scale, normalSize.X.Offset - 1, normalSize.Y.Scale, normalSize.Y.Offset - 1)
+				
+				local tweenInfo = TweenInfo.new(0.12, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+				
+				local function tween(props)
+					TweenService:Create(TextButton, tweenInfo, props):Play()
+				end
+				
+				TextButton.MouseEnter:Connect(function()
+					tween({
+						TextColor3 = Color3.fromRGB(200, 200, 255),
+						Size = hoverSize
+					})
+				end)
+				
+				TextButton.MouseLeave:Connect(function()
+					tween({
+						TextColor3 = Color3.fromRGB(255, 255, 255),
+						Size = normalSize
+					})
+				end)
+				
+				TextButton.MouseButton1Down:Connect(function()
+					tween({
+						Size = clickSize
+					})
+				end)
+				
+				TextButton.MouseButton1Up:Connect(function()
+					tween({
+						Size = hoverSize
+					})
+				end)
 				
 				TextButton.MouseButton1Click:Connect(function()
 					setclipboard(Content.Text)
@@ -5644,6 +5702,10 @@ function RayfieldLibrary:CreateWindow(Settings)
 			Dropdown.MouseLeave:Connect(function()
 				TweenService:Create(Dropdown, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
 			end)
+			
+			Dropdown.Toggle.Image = "rbxassetid://12338898398"
+			Dropdown.Toggle.ImageRectOffset = Vector2.new(0,0)
+			Dropdown.Toggle.ImageRectSize = Vector2.new(0,0)
 
 			local function SetDropdownOptions()
 				for _, Option in ipairs(DropdownSettings.Options) do
@@ -5656,18 +5718,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 					DropdownOption.BackgroundTransparency = 1
 					DropdownOption.UIStroke.Transparency = 1
 					DropdownOption.Title.TextTransparency = 1
-
-					--local Dropdown = Tab:CreateDropdown({
-					--	Name = "Dropdown Example",
-					--	Options = {"Option 1","Option 2"},
-					--	CurrentOption = {"Option 1"},
-					--  MultipleOptions = true,
-					--	Flag = "Dropdown1",
-					--	Callback = function(TableOfOptions)
-
-					--	end,
-					--})
-
 
 					DropdownOption.Interact.ZIndex = 50
 					DropdownOption.Interact.MouseButton1Click:Connect(function()
@@ -6670,166 +6720,6 @@ function RayfieldLibrary:LoadConfiguration()
 	end
 
 	globalLoaded = true
-end
-
-
-
-if useStudio then
-	local Window = RayfieldLibrary:CreateWindow({
-		Name = "Rayfield Example Window",
-		LoadingTitle = "Rayfield Interface Suite",
-		Theme = 'Default',
-		Icon = 0,
-		LoadingSubtitle = "by Sirius",
-		ConfigurationSaving = {
-			Enabled = true,
-			FolderName = nil, -- Create a custom folder for your hub/game
-			FileName = "Big Hub52"
-		},
-		Discord = {
-			Enabled = false,
-			Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ABCD would be ABCD
-			RememberJoins = true -- Set this to false to make them join the discord every time they load it up
-		},
-		KeySystem = false, -- Set this to true to use our key system
-		KeySettings = {
-			Title = "Untitled",
-			Subtitle = "Key System",
-			Note = "No method of obtaining the key is provided",
-			FileName = "Key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
-			SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
-			GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
-			Key = {"Hello"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
-		}
-	})
-
-	local Tab = Window:CreateTab("Tab Example", 'key-round') -- Title, Image
-	local Tab2 = Window:CreateTab("Tab Example 2", 4483362458) -- Title, Image
-
-	local Section = Tab2:CreateSection("Section")
-
-
-	local ColorPicker = Tab2:CreateColorPicker({
-		Name = "Color Picker",
-		Color = Color3.fromRGB(255,255,255),
-		Flag = "ColorPicfsefker1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
-		Callback = function(Value)
-			-- The function that takes place every time the color picker is moved/changed
-			-- The variable (Value) is a Color3fromRGB value based on which color is selected
-		end
-	})
-
-	local Slider = Tab2:CreateSlider({
-		Name = "Slider Example",
-		Range = {0, 100},
-		Increment = 10,
-		Suffix = "Bananas",
-		CurrentValue = 40,
-		Flag = "Slidefefsr1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
-		Callback = function(Value)
-			-- The function that takes place when the slider changes
-			-- The variable (Value) is a number which correlates to the value the slider is currently at
-		end,
-	})
-
-	local Input = Tab2:CreateInput({
-		Name = "Input Example",
-		CurrentValue = '',
-		PlaceholderText = "Input Placeholder",
-		Flag = 'dawdawd',
-		RemoveTextAfterFocusLost = false,
-		Callback = function(Text)
-			-- The function that takes place when the input is changed
-			-- The variable (Text) is a string for the value in the text box
-		end,
-	})
-
-
-	--RayfieldLibrary:Notify({Title = "Rayfield Interface", Content = "Welcome to Rayfield. These - are the brand new notification design for Rayfield, with custom sizing and Rayfield calculated wait times.", Image = 4483362458})
-
-	local Section = Tab:CreateSection("Section Example")
-
-	local Button = Tab:CreateButton({
-		Name = "Change Theme",
-		Callback = function()
-			-- The function that takes place when the button is pressed
-			Window.ModifyTheme('DarkBlue')
-		end,
-	})
-
-	local Toggle = Tab:CreateToggle({
-		Name = "Toggle Example",
-		CurrentValue = false,
-		Flag = "Toggle1adwawd", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
-		Callback = function(Value)
-			-- The function that takes place when the toggle is pressed
-			-- The variable (Value) is a boolean on whether the toggle is true or false
-		end,
-	})
-
-	local ColorPicker = Tab:CreateColorPicker({
-		Name = "Color Picker",
-		Color = Color3.fromRGB(255,255,255),
-		Flag = "ColorPicker1awd", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
-		Callback = function(Value)
-			-- The function that takes place every time the color picker is moved/changed
-			-- The variable (Value) is a Color3fromRGB value based on which color is selected
-		end
-	})
-
-	local Slider = Tab:CreateSlider({
-		Name = "Slider Example",
-		Range = {0, 100},
-		Increment = 10,
-		Suffix = "Bananas",
-		CurrentValue = 40,
-		Flag = "Slider1dawd", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
-		Callback = function(Value)
-		end,
-	})
-
-	local Input = Tab:CreateInput({
-		Name = "Input Example",
-		CurrentValue = "Helo",
-		PlaceholderText = "Adaptive Input",
-		RemoveTextAfterFocusLost = false,
-		Flag = 'Input1',
-		Callback = function(Text)
-			-- The function that takes place when the input is changed
-			-- The variable (Text) is a string for the value in the text box
-		end,
-	})
-
-	local thoptions = {}
-	for themename, theme in pairs(RayfieldLibrary.Theme) do
-		table.insert(thoptions, themename)
-	end
-
-	local Dropdown = Tab:CreateDropdown({
-		Name = "Theme",
-		Options = thoptions,
-		CurrentOption = {"Default"},
-		MultipleOptions = false,
-		Flag = "Dropdown1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
-		Callback = function(Options)
-		end,
-	})
-	local Keybind = Tab:CreateKeybind({
-		Name = "Keybind Example",
-		CurrentKeybind = "Q",
-		HoldToInteract = false,
-		Flag = "Keybind1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
-		Callback = function(Keybind)
-			-- The function that takes place when the keybind is pressed
-			-- The variable (Keybind) is a boolean for whether the keybind is being held or not (HoldToInteract needs to be true)
-		end,
-	})
-
-	local Label = Tab:CreateLabel("Label Example")
-
-	local Label2 = Tab:CreateLabel("Warning", 4483362458, Color3.fromRGB(255, 159, 49),  true)
-
-	local Paragraph = Tab:CreateParagraph({Title = "Paragraph Example", Content = "Paragraph ExampleParagraph ExampleParagraph ExampleParagraph ExampleParagraph ExampleParagraph ExampleParagraph ExampleParagraph ExampleParagraph ExampleParagraph ExampleParagraph ExampleParagraph ExampleParagraph ExampleParagraph Example"})
 end
 
 if CEnabled and Main:FindFirstChild('Notice') then
