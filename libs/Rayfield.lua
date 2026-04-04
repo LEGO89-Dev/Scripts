@@ -4130,7 +4130,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 		
 		local UICorner_3 = Instance.new("UICorner")
 		UICorner_3.Name = "UICorner"
-		UICorner_3.Parent = TextButton
+		UICorner_3.Parent = EditShow
 		UICorner_3.CornerRadius = UDim.new(0, 9)
 		
 		local TextLabel = Instance.new("TextLabel")
@@ -4138,11 +4138,12 @@ function RayfieldLibrary:CreateWindow(Settings)
 		TextLabel.Parent = EditShow
 		TextLabel.Active = true
 		TextLabel.BackgroundTransparency = 1
+		TextLabel.AnchorPoint = Vector2.new(1, 0)
 		TextLabel.Size = UDim2.new(0.5,0,1,0)
 		TextLabel.Position = UDim2.new(0.5,0,0,0)
 		TextLabel.ZIndex = 10
 		TextLabel.Text = "Editing message"
-		TextLabel.TextColor3 = Color3.fromRGB(0, 85, 255)
+		TextLabel.TextColor3 = Color3.new(1,1,1)
 		TextLabel.TextSize = 10
 		TextLabel.TextXAlignment = Enum.TextXAlignment.Left
 		
@@ -4153,17 +4154,12 @@ function RayfieldLibrary:CreateWindow(Settings)
 		ImageButton.BackgroundTransparency = 1
 		ImageButton.Position = UDim2.new(1,-5,0.5,0)
 		ImageButton.Size = UDim2.new(0,15,0,15)
-		ImageButton.ImageColor3 = Color3.fromRGB(0, 85, 255)
+		ImageButton.ImageColor3 = Color3.new(1,1,1)
 		ImageButton.ZIndex = 10
 		ImageButton.Image = "rbxassetid://4458805208"
 		
 		TabPage.Name = Name
 		TabPage.Visible = true
-		
-		InputBox:GetPropertyChangedSignal("Text"):Connect(function()
-			local textHeight = InputBox.TextBounds.Y
-			Input.Size = UDim2.new(1, -10, 0, math.clamp(textHeight, 0, 100) + SizePag)
-		end)
 
 		TabPage.LayoutOrder = #Elements:GetChildren() or Ext and 10000
 
