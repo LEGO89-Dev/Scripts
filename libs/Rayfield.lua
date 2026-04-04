@@ -761,19 +761,8 @@ local function ChangeTheme(Theme)
 	end
 end
 
---[[
-hide rbxassetid://10152135063
-setting rbxassetid://96532016886427
-search rbxassetid://118685771787843
-change size rbxassetid://90434151822042
-drop down rbxassetid://12338898398
-
-ImageRectOffset = Vector2.new(0,0)
-ImageRectSize = Vector2.new(0,0)
---]]
-
 Topbar.Hide.Image = "rbxassetid://10152135063"
-Topbar.Setting.Image = "rbxassetid://96532016886427"
+Topbar.Settings.Image = "rbxassetid://96532016886427"
 Topbar.Search.Image = "rbxassetid://118685771787843"
 Topbar.ChangeSize.Image = "rbxassetid://90434151822042"
 
