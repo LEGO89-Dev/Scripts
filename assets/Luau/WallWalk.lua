@@ -1,6 +1,5 @@
 return [[
 script = Instance.new("LocalScript")
-local TouchGui
 
 function _ClickToMoveDisplay()
 	local ClickToMoveDisplay = {}
@@ -3414,7 +3413,12 @@ function _ControlModule()
 
 	function ControlModule:CreateTouchGuiContainer()
 		if self.touchGui then self.touchGui:Destroy() end
-
+		
+		local TouchGui = self.playerGui:FindFirstChild("TouchGui")
+		if TouchGui then
+			TouchGui:Destroy()
+		end
+		
 		self.touchGui = Instance.new("ScreenGui")
 		self.touchGui.Name = "TouchGui"
 		self.touchGui.ResetOnSpawn = false
@@ -3428,7 +3432,7 @@ function _ControlModule()
 		self.touchControlFrame.Parent = self.touchGui
 
 		self.touchGui.Parent = self.playerGui
-		TouchGui = self.touchGui
+		
 	end
 
 	function ControlModule:GetClickToMoveController()
@@ -6003,6 +6007,4 @@ function GetGravityUp(self, oldGravityUp)
 end
 
 Controller.GetGravityUp = GetGravityUp
-
-return TouchGui
 ]]
