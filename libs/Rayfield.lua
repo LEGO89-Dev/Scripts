@@ -4046,7 +4046,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 		InputBox_2.Name = "Text"
 		InputBox_2.TextXAlignment = Enum.TextXAlignment.Left
 		InputBox_2.Position = UDim2.new(0.5, 0, 0.5, 0)
-		InputBox_2.Size = UDim2.new(ScrollingFrame.AbsoluteSize.X, 0, 1, 0)
+		InputBox_2.Size = UDim2.new(0, InputBox.AbsoluteSize.X, 1, 0)
 		InputBox_2.AnchorPoint = Vector2.new(0.5, 0.5)
 		InputBox_2.BackgroundTransparency = 1
 		InputBox_2.ZIndex = 7
@@ -4195,14 +4195,14 @@ function RayfieldLibrary:CreateWindow(Settings)
 		
 		InputBox:GetPropertyChangedSignal("Text"):Connect(function()
 			InputBox_2.Text = InputBox.Text
-			Input.Size = UDim2.new(1, -10, 0, math.clamp(InputBox_2.AbsoluteSize.Y, 0, 100) + SizePag)
-			ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, InputBox_2.AbsoluteSize.Y)
+			TweenService:Create(Input, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {Size = UDim2.new(1, -10, 0, math.clamp(InputBox_2.AbsoluteSize.Y, 0, 100) + SizePag)}):Play()
+			TweenService:Create(ScrollingFrame, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {CanvasSize = UDim2.new(0, 0, 0, InputBox_2.AbsoluteSize.Y)}):Play()
 		end)
 		
 		InputBox.FocusLost:Connect(function()
 			InputBox_2.Text = InputBox.Text
-			Input.Size = UDim2.new(1, -10, 0, math.clamp(InputBox_2.AbsoluteSize.Y, 0, 100) + SizePag)
-			ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, InputBox_2.AbsoluteSize.Y)
+			TweenService:Create(Input, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {Size = UDim2.new(1, -10, 0, math.clamp(InputBox_2.AbsoluteSize.Y, 0, 100) + SizePag)}):Play()
+			TweenService:Create(ScrollingFrame, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {CanvasSize = UDim2.new(0, 0, 0, InputBox_2.AbsoluteSize.Y)}):Play()
 		end)
 
 		TabPage.LayoutOrder = #Elements:GetChildren() or Ext and 10000
