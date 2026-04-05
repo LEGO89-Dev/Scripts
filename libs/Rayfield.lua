@@ -2225,7 +2225,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 			ScrollingFrame.BackgroundTransparency = 1
 			ScrollingFrame.ScrollBarThickness = 0
 			ScrollingFrame.ScrollBarImageTransparency = 1
-			ScrollingFrame.AutomaticCanvasSize = Enum.AutomaticSize.XY
+			ScrollingFrame.AutomaticCanvasSize = Enum.AutomaticSize.None
 			ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 			ScrollingFrame.HorizontalScrollBarInset = Enum.ScrollBarInset.Always
 			ScrollingFrame.VerticalScrollBarInset = Enum.ScrollBarInset.Always
@@ -2249,7 +2249,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 		    TextBox.ClearTextOnFocus = false
 			TextBox.MultiLine = true
 			TextBox.RichText = true
-			TextBox.TextWrapped = true
+			TextBox.TextWrapped = false
 			
 			local UICorner = Instance.new("UICorner")
 		    UICorner.CornerRadius = UDim.new(0, 9)
@@ -2259,7 +2259,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 		    TweenService:Create(UIStroke, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {Transparency = 0}):Play()
 		
 		    TextBox.FocusLost:Connect(function()
-				TweenService:Create(ScrollingFrame, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {CanvasSize = UDim2.new(0, 0, 0, TextBox.AbsoluteSize.Y)}):Play()
+				TweenService:Create(ScrollingFrame, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {CanvasSize = UDim2.new(0, TextBox.AbsoluteSize.X, 0, TextBox.AbsoluteSize.Y)}):Play()
 				local Success, Response = pcall(function()
 					TextEditorSettings.Callback(TextBox.Text)
 					TextEditorSettings.CurrentValue = TextBox.Text
