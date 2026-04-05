@@ -4024,9 +4024,10 @@ function RayfieldLibrary:CreateWindow(Settings)
 		InputBox.BackgroundTransparency = 1
 		InputBox.ZIndex = 7
 		InputBox.Text = [[]]
+		InputBox.PlaceholderText = TextHolder
 		InputBox.TextWrapped = true
 		InputBox.RichText = true
-		InputBox.ClearTextOnFocus = true
+		InputBox.ClearTextOnFocus = false
 		InputBox.MultiLine = true
 		InputBox.AutomaticSize = Enum.AutomaticSize.Y
 		InputBox.TextColor3 = Color3.new(1, 1, 1)
@@ -4177,6 +4178,11 @@ function RayfieldLibrary:CreateWindow(Settings)
 			Input.Size = UDim2.new(1, -10, 0, math.clamp(InputBox.AbsoluteSize.Y, 0, 100) + SizePag)
 			ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, InputBox.AbsoluteSize.Y)
 		end)
+		
+		InputBox.FocusLost:Connect(function()
+			Input.Size = UDim2.new(1, -10, 0, math.clamp(InputBox.AbsoluteSize.Y, 0, 100) + SizePag)
+			ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, InputBox.AbsoluteSize.Y)
+		end)
 
 		TabPage.LayoutOrder = #Elements:GetChildren() or Ext and 10000
 
@@ -4278,13 +4284,19 @@ function RayfieldLibrary:CreateWindow(Settings)
 		end))
 		
 		TextButton.MouseButton1Click:Connect(function()
-			pcall(ButtonSettings.Callback2)
+			local Success, Response = pcall(ButtonSettings.Callback2)
+			if Response then
+				print(Response)
+			end
 		end)
 		
 		ImageButton.MouseButton1Click:Connect(function()
 			EditShow.Visible = false
 			TweenService:Create(Input, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Size = UDim2.new(1, -10, 0, 40)}):Play()
-			pcall(ButtonSettings.Callback3)
+			local Success, Response = pcall(ButtonSettings.Callback3)
+			if Response then
+				print(Response)
+			end
 		end)
 		
 		local Tab = {}
