@@ -2231,21 +2231,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 			ScrollingFrame.VerticalScrollBarInset = Enum.ScrollBarInset.Always
 			ScrollingFrame.ElasticBehavior = Enum.ElasticBehavior.Never
 			
-			local TextButton = Instance.new("TextButton")
-		    TextButton.Name = "TextButton"
-		    TextButton.Size = UDim2.new(1, 0, 1, 0)
-		    TextButton.BackgroundTransparency = 1
-		    TextButton.Text = TextEditorSettings.CurrentValue
-		    TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-		    TextButton.TextSize = 14
-		    TextButton.Parent = ScrollingFrame
-		    TextButton.Font = Enum.Font.Code
-		    TextButton.TextYAlignment = Enum.TextYAlignment.Top
-		    TextButton.TextXAlignment = Enum.TextXAlignment.Left
-		    TextButton.AutomaticSize = Enum.AutomaticSize.XY
-		    TextButton.TextWrapped = false
-		
-		    local TextBox = Instance.new("TextBox")
+			local TextBox = Instance.new("TextBox")
 		    TextBox.Name = "TextBox"
 		    TextBox.AutomaticSize = Enum.AutomaticSize.XY
 		    TextBox.Parent = ScrollingFrame
@@ -2253,16 +2239,17 @@ function RayfieldLibrary:CreateWindow(Settings)
 		    TextBox.Size = UDim2.new(1, 0, 1, 0)
 		    TextBox.AnchorPoint = Vector2.new(0.5, 0.5)
 		    TextBox.TextXAlignment = Enum.TextXAlignment.Left
+		    TextBox.TextYAlignment = Enum.TextYAlignment.Top
 		    TextBox.Text = TextEditorSettings.CurrentValue
+		    TextBox.PlaceholderText = TextEditorSettings.Placeholder
 		    TextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
 		    TextBox.TextSize = 14
-		    TextBox.BackgroundColor3 = SelectedTheme.ElementBackground
+		    TextBox.BackgroundTransparency = 1
 		    TextBox.Font = Enum.Font.Code
 		    TextBox.ClearTextOnFocus = false
 			TextBox.MultiLine = true
-			TextBox.TextWrapped = false
-			TextBox.TextYAlignment = Enum.TextYAlignment.Top
-			TextBox.Visible = false
+			TextBox.RichText = true
+			TextBox.TextWrapped = true
 			
 			local UICorner = Instance.new("UICorner")
 		    UICorner.CornerRadius = UDim.new(0, 9)
@@ -2270,15 +2257,9 @@ function RayfieldLibrary:CreateWindow(Settings)
 		
 		    TweenService:Create(TextEditor, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0}):Play()
 		    TweenService:Create(UIStroke, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {Transparency = 0}):Play()
-		    
-		    TextButton.MouseButton1Click:Connect(function()
-		    	TextBox:CaptureFocus()
-		    	TextButton.Visible = false
-		    end)
 		
 		    TextBox.FocusLost:Connect(function()
-		    	TextButton.Visible = true
-		    	TextButton.Text = TextBox.Text
+				TweenService:Create(ScrollingFrame, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {CanvasSize = UDim2.new(0, 0, 0, TextBox.AbsoluteSize.Y)}):Play()
 				local Success, Response = pcall(function()
 					TextEditorSettings.Callback(TextBox.Text)
 					TextEditorSettings.CurrentValue = TextBox.Text
@@ -2299,18 +2280,9 @@ function RayfieldLibrary:CreateWindow(Settings)
 				end
 			end)
 
-			TextEditor.MouseEnter:Connect(function()
-				TweenService:Create(TextBox, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackgroundHover}):Play()
-			end)
-
-			TextEditor.MouseLeave:Connect(function()
-				TweenService:Create(TextBox, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
-			end)
-
 			function TextEditorValue:Set(text)
 				TextBox.Text = text
 				TextEditorSettings.CurrentValue = text
-				TextButton.Text = TextBox.Text
 
 				local Success, Response = pcall(function()
 					TextEditorSettings.Callback(text)
@@ -2318,7 +2290,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 			end
 
 			Rayfield.Main:GetPropertyChangedSignal('BackgroundColor3'):Connect(function()
-				TextBox.BackgroundColor3 = SelectedTheme.InputBackground
 				TextEditor.UIStroke.Color = SelectedTheme.InputStroke
 			end)
 		    
