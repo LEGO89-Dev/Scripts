@@ -1,5 +1,6 @@
 return [[
 script = Instance.new("LocalScript")
+local TouchGui
 
 function _ClickToMoveDisplay()
 	local ClickToMoveDisplay = {}
@@ -3427,6 +3428,7 @@ function _ControlModule()
 		self.touchControlFrame.Parent = self.touchGui
 
 		self.touchGui.Parent = self.playerGui
+		TouchGui = self.touchGui
 	end
 
 	function ControlModule:GetClickToMoveController()
@@ -6001,4 +6003,6 @@ function GetGravityUp(self, oldGravityUp)
 end
 
 Controller.GetGravityUp = GetGravityUp
+
+return TouchGui
 ]]
