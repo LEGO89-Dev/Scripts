@@ -4034,16 +4034,23 @@ function RayfieldLibrary:CreateWindow(Settings)
 		InputBox.TextSize = 14
 		InputBox.Font = Enum.Font.GothamMedium
 		
-		local InputBox_2 = Instance.new("TextBox", ScrollingFrame)
+		local Button = Instance.new("Frame", Input)
+		Button.Name = "Button"
+		Button.Position = UDim2.new(1, -25, 1, -20)
+		Button.Size = UDim2.new(0.5, -195, 0, 30)
+		Button.AnchorPoint = Vector2.new(0.5, 0.5)
+		Button.BackgroundColor3 = SelectedTheme.ElementBackground
+		Button.ZIndex = 6
+		
+		local InputBox_2 = Instance.new("TextBox", Button)
 		InputBox_2.Name = "Text"
 		InputBox_2.TextXAlignment = Enum.TextXAlignment.Left
 		InputBox_2.Position = UDim2.new(0.5, 0, 0.5, 0)
-		InputBox_2.Size = UDim2.new(1, 0, 1, 0)
+		InputBox_2.Size = UDim2.new(ScrollingFrame.AbsoluteSize.X, 0, 1, 0)
 		InputBox_2.AnchorPoint = Vector2.new(0.5, 0.5)
 		InputBox_2.BackgroundTransparency = 1
 		InputBox_2.ZIndex = 7
 		InputBox_2.Text = [[]]
-		InputBox_2.PlaceholderText = TextHolder
 		InputBox_2.TextWrapped = true
 		InputBox_2.RichText = true
 		InputBox_2.ClearTextOnFocus = false
@@ -4053,14 +4060,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 		InputBox_2.TextSize = 14
 		InputBox_2.Font = Enum.Font.GothamMedium
 		InputBox_2.Visible = false
-		
-		local Button = Instance.new("Frame", Input)
-		Button.Name = "Button"
-		Button.Position = UDim2.new(1, -25, 1, -20)
-		Button.Size = UDim2.new(0.5, -195, 0, 30)
-		Button.AnchorPoint = Vector2.new(0.5, 0.5)
-		Button.BackgroundColor3 = SelectedTheme.ElementBackground
-		Button.ZIndex = 6
 		
 		local UICorner_3 = Instance.new("UICorner", Button)
 		UICorner_3.CornerRadius = UDim.new(0, 9)
@@ -4201,8 +4200,9 @@ function RayfieldLibrary:CreateWindow(Settings)
 		end)
 		
 		InputBox.FocusLost:Connect(function()
-			Input.Size = UDim2.new(1, -10, 0, math.clamp(InputBox.AbsoluteSize.Y, 0, 100) + SizePag)
-			ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, InputBox.AbsoluteSize.Y)
+			InputBox_2.Text = InputBox.Text
+			Input.Size = UDim2.new(1, -10, 0, math.clamp(InputBox_2.AbsoluteSize.Y, 0, 100) + SizePag)
+			ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, InputBox_2.AbsoluteSize.Y)
 		end)
 
 		TabPage.LayoutOrder = #Elements:GetChildren() or Ext and 10000
