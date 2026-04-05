@@ -3740,7 +3740,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 				local Loop; Loop = RunService.Stepped:Connect(function()
 					if SLDragging then
 						Location = UserInputService:GetMouseLocation().X
-						Current = Current + 0.025 * (Location - Start)
+						Current = Location
 
 						if Location < Slider.Main.AbsolutePosition.X then
 							Location = Slider.Main.AbsolutePosition.X
