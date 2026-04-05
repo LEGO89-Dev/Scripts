@@ -4002,22 +4002,34 @@ function RayfieldLibrary:CreateWindow(Settings)
 		local UIStroke = Instance.new("UIStroke", Input)
 		UIStroke.Color = Color3.new(0.19607843458652496, 0.19607843458652496, 0.19607843458652496)
 		
-		local InputBox = Instance.new("TextBox", Input)
+		local ScrollingFrame = Instance.new("ScrollingFrame", Input)
+		ScrollingFrame.Size = UDim2.new(1, -60, 0, 30)
+		ScrollingFrame.Position = UDim2.new(1, -50, 1, -5)
+		ScrollingFrame.AnchorPoint = Vector2.new(1, 1)
+		ScrollingFrame.BackgroundTransparency = 1
+		ScrollingFrame.ScrollBarThickness = 0
+		ScrollingFrame.ZIndex = 7
+		ScrollingFrame.ScrollBarImageTransparency = 1
+		ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
+		ScrollingFrame.HorizontalScrollBarInset = Enum.ScrollBarInset.Always
+		ScrollingFrame.VerticalScrollBarInset = Enum.ScrollBarInset.Always
+		ScrollingFrame.ElasticBehavior = Enum.ElasticBehavior.Never
+		
+		local InputBox = Instance.new("TextBox", ScrollingFrame)
 		InputBox.Name = "InputBox"
 		InputBox.TextXAlignment = Enum.TextXAlignment.Left
-		InputBox.Position = UDim2.new(1, -50, 1, -5)
-		InputBox.Size = UDim2.new(1, -60, 0, 30)
-		InputBox.AnchorPoint = Vector2.new(1, 1)
-		InputBox.BackgroundColor3 = SelectedTheme.ElementBackground
+		InputBox.Position = UDim2.new(0.5, 0, 0.5, 0)
+		InputBox.Size = UDim2.new(1, 0, 1, 0)
+		InputBox.AnchorPoint = Vector2.new(0.5, 0.5)
 		InputBox.BackgroundTransparency = 1
 		InputBox.ZIndex = 7
 		InputBox.Text = [[]]
-		InputBox.MultiLine = true
 		InputBox.TextWrapped = true
+		InputBox.RichText = true
+		InputBox.ClearTextOnFocus = true
+		InputBox.MultiLine = true
 		InputBox.AutomaticSize = Enum.AutomaticSize.Y
-		InputBox.ClearTextOnFocus = false
-		InputBox.PlaceholderText = TextHolder
-		InputBox.TextColor3 = Color3.new(0.9411764740943909, 0.9411764740943909, 0.9411764740943909)
+		InputBox.TextColor3 = Color3.new(1, 1, 1)
 		InputBox.TextSize = 14
 		InputBox.Font = Enum.Font.GothamMedium
 		
@@ -4160,6 +4172,11 @@ function RayfieldLibrary:CreateWindow(Settings)
 		
 		TabPage.Name = Name
 		TabPage.Visible = true
+		
+		InputBox:GetPropertyChangedSignal("Text"):Connect(function()
+			Input.Size = UDim2.new(1, -10, 0, math.clamp(InputBox.AbsoluteSize.Y, 0, 100) + SizePag)
+			ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, InputBox.AbsoluteSize.Y)
+		end)
 
 		TabPage.LayoutOrder = #Elements:GetChildren() or Ext and 10000
 
