@@ -4003,7 +4003,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 		UIStroke.Color = Color3.new(0.19607843458652496, 0.19607843458652496, 0.19607843458652496)
 		
 		local ScrollingFrame = Instance.new("ScrollingFrame", Input)
-		ScrollingFrame.Size = UDim2.new(1, -60, 0, 30)
+		ScrollingFrame.Size = UDim2.new(1, -60, 1, -10)
 		ScrollingFrame.Position = UDim2.new(1, -50, 1, -5)
 		ScrollingFrame.AnchorPoint = Vector2.new(1, 1)
 		ScrollingFrame.BackgroundTransparency = 1
@@ -4033,6 +4033,26 @@ function RayfieldLibrary:CreateWindow(Settings)
 		InputBox.TextColor3 = Color3.new(1, 1, 1)
 		InputBox.TextSize = 14
 		InputBox.Font = Enum.Font.GothamMedium
+		
+		local InputBox_2 = Instance.new("TextBox", ScrollingFrame)
+		InputBox_2.Name = "Text"
+		InputBox_2.TextXAlignment = Enum.TextXAlignment.Left
+		InputBox_2.Position = UDim2.new(0.5, 0, 0.5, 0)
+		InputBox_2.Size = UDim2.new(1, 0, 1, 0)
+		InputBox_2.AnchorPoint = Vector2.new(0.5, 0.5)
+		InputBox_2.BackgroundTransparency = 1
+		InputBox_2.ZIndex = 7
+		InputBox_2.Text = [[]]
+		InputBox_2.PlaceholderText = TextHolder
+		InputBox_2.TextWrapped = true
+		InputBox_2.RichText = true
+		InputBox_2.ClearTextOnFocus = false
+		InputBox_2.MultiLine = true
+		InputBox_2.AutomaticSize = Enum.AutomaticSize.Y
+		InputBox_2.TextColor3 = Color3.new(1, 1, 1)
+		InputBox_2.TextSize = 14
+		InputBox_2.Font = Enum.Font.GothamMedium
+		InputBox_2.Visible = false
 		
 		local Button = Instance.new("Frame", Input)
 		Button.Name = "Button"
@@ -4068,22 +4088,22 @@ function RayfieldLibrary:CreateWindow(Settings)
 		ImageLabel.Image = img
 		ImageLabel.Parent = Interact
 		
-		local ScrollingFrame = Instance.new("ScrollingFrame", TabPage)
-		ScrollingFrame.ScrollBarImageTransparency = 1
-		ScrollingFrame.ScrollBarThickness = 0
-		ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
-		ScrollingFrame.AutomaticCanvasSize = Enum.AutomaticSize.Y
-		ScrollingFrame.Position = UDim2.new(0.5, 0, 0.3799999952316284, 0)
-		ScrollingFrame.Size = UDim2.new(1, 0, 0.75, 0)
-		ScrollingFrame.AnchorPoint = Vector2.new(0.5, 0.5)
-		ScrollingFrame.BackgroundTransparency = 1
+		local ScrollingFrame_2 = Instance.new("ScrollingFrame", TabPage)
+		ScrollingFrame_2.ScrollBarImageTransparency = 1
+		ScrollingFrame_2.ScrollBarThickness = 0
+		ScrollingFrame_2.CanvasSize = UDim2.new(0, 0, 0, 0)
+		ScrollingFrame_2.AutomaticCanvasSize = Enum.AutomaticSize.Y
+		ScrollingFrame_2.Position = UDim2.new(0.5, 0, 0.3799999952316284, 0)
+		ScrollingFrame_2.Size = UDim2.new(1, 0, 0.75, 0)
+		ScrollingFrame_2.AnchorPoint = Vector2.new(0.5, 0.5)
+		ScrollingFrame_2.BackgroundTransparency = 1
 		
-		local UIListLayout = Instance.new("UIListLayout", ScrollingFrame)
+		local UIListLayout = Instance.new("UIListLayout", ScrollingFrame_2)
 		UIListLayout.FillDirection = Enum.FillDirection.Vertical
 		UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 		UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 		
-		local SectionSpacing = Instance.new("Frame", ScrollingFrame)
+		local SectionSpacing = Instance.new("Frame", ScrollingFrame_2)
 		SectionSpacing.Name = "SectionSpacing"
 		SectionSpacing.Position = UDim2.new(0, 0, 0.48091602325439453, 0)
 		SectionSpacing.Size = UDim2.new(1, 0, 0, 8)
@@ -4175,8 +4195,9 @@ function RayfieldLibrary:CreateWindow(Settings)
 		TabPage.Visible = true
 		
 		InputBox:GetPropertyChangedSignal("Text"):Connect(function()
-			Input.Size = UDim2.new(1, -10, 0, math.clamp(InputBox.AbsoluteSize.Y, 0, 100) + SizePag)
-			ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, InputBox.AbsoluteSize.Y)
+			InputBox_2.Text = InputBox.Text
+			Input.Size = UDim2.new(1, -10, 0, math.clamp(InputBox_2.AbsoluteSize.Y, 0, 100) + SizePag)
+			ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, InputBox_2.AbsoluteSize.Y)
 		end)
 		
 		InputBox.FocusLost:Connect(function()
