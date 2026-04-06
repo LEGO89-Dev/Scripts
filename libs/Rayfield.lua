@@ -6491,6 +6491,7 @@ end
 
 function RayfieldLibrary:SetEnable(Value)
 	Rayfield.Main.Visible = Value
+	Rayfield.Drag.Visible = Value
 end
 
 local hideHotkeyConnection -- Has to be initialized here since the connection is made later in the script
