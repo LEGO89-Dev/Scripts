@@ -6482,7 +6482,7 @@ function RayfieldLibrary:IsVisible(): boolean
 end
 
 function RayfieldLibrary:GetEnable()
-	return Rayfield.Enabled
+	return Rayfield.Main.Visible
 end
 
 function RayfieldLibrary:GetParent()
@@ -6490,7 +6490,7 @@ function RayfieldLibrary:GetParent()
 end
 
 function RayfieldLibrary:SetEnable(Value)
-	Rayfield.Enabled = Value
+	Rayfield.Main.Visible = Value
 end
 
 local hideHotkeyConnection -- Has to be initialized here since the connection is made later in the script
