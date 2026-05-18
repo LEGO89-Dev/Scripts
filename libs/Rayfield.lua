@@ -3407,7 +3407,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 				if NewToggleValue == true then
 					ToggleSettings.CurrentValue = true
 					TweenService:Create(Toggle, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackgroundHover}):Play()
-					TweenService:Create(Toggle.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
 					TweenService:Create(Toggle.Switch.Indicator, TweenInfo.new(0.5, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Position = UDim2.new(1, -20, 0.5, 0)}):Play()
 					TweenService:Create(Toggle.Switch.Indicator, TweenInfo.new(0.4, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Size = UDim2.new(0,12,0,12)}):Play()
 					TweenService:Create(Toggle.Switch.Indicator.UIStroke, TweenInfo.new(0.55, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {Color = SelectedTheme.ToggleEnabledStroke}):Play()
@@ -3419,7 +3418,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 				else
 					ToggleSettings.CurrentValue = false
 					TweenService:Create(Toggle, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackgroundHover}):Play()
-					TweenService:Create(Toggle.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
 					TweenService:Create(Toggle.Switch.Indicator, TweenInfo.new(0.45, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Position = UDim2.new(1, -40, 0.5, 0)}):Play()
 					TweenService:Create(Toggle.Switch.Indicator, TweenInfo.new(0.4, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Size = UDim2.new(0,12,0,12)}):Play()
 					TweenService:Create(Toggle.Switch.Indicator.UIStroke, TweenInfo.new(0.55, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {Color = SelectedTheme.ToggleDisabledStroke}):Play()
@@ -4192,7 +4190,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 		
 		Rayfield.Main:GetPropertyChangedSignal('BackgroundColor3'):Connect(function()
 			Button.BackgroundColor3 = SelectedTheme.InputBackground
-			InputFrame.BackgroundColor3 = SelectedTheme.InputBackground
 		end)
 
 		TabButton.UIStroke.Color = SelectedTheme.TabStroke
@@ -5442,8 +5439,8 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 			Rayfield.Main:GetPropertyChangedSignal('BackgroundColor3'):Connect(function()
 				if not Paragraph then return end
-				Paragraph2.BackgroundColor3 = SelectedTheme.ElementBackground
-				Paragraph2.UIStroke.Color = SelectedTheme.ElementStroke
+				Paragraph.BackgroundColor3 = SelectedTheme.ElementBackground
+				Paragraph.UIStroke.Color = SelectedTheme.ElementStroke
 			end)
 			
 			function ParagraphValue:GetDestroy()
